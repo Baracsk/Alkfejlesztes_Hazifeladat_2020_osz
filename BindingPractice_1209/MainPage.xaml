@@ -11,28 +11,58 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.2*"/>
         </Grid.ColumnDefinitions>
         <TextBox Grid.Row="0" 
                  Grid.Column="0" 
-                 Grid.ColumnSpan="3" 
-                 Text="FAST" 
-                 FontSize="50" 
+                 Grid.ColumnSpan="5" 
+                 Text="ROBOT diagnostic application" 
+                 FontSize="20" 
                  Background="ForestGreen" 
                  />
+        
         <TextBox Grid.Row="1"
                  Grid.Column="0"
-                 Text="{Binding Text}"
-                 FontSize="30"
+                 Text="Steering:"
+                 FontSize="10"
+                 VerticalAlignment="Center"
                  />
-
-
+        <TextBox Grid.Row="3"
+                 Grid.Column="0"
+                 Text="Speed:"
+                 FontSize="10"
+                 VerticalAlignment="Center"
+                 />
+        <TextBox Grid.Row="4"
+                 Grid.Column="0"
+                 Text="Position:"
+                 FontSize="10"
+                 VerticalAlignment="Center" 
+                 />
+        <Slider HorizontalAlignment="Left" 
+                Grid.ColumnSpan="2"
+                Maximum="90"
+                Minimum="-90"
+                Value="{Binding SteerValue}"
+                Margin="10,0,0,0" 
+                Grid.Row="2" 
+                VerticalAlignment="Center" 
+                
+                Width="150"/>
 
     </Grid>
 </Page>
