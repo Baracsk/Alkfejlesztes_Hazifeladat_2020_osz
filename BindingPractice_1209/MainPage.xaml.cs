@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Timers;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,7 +25,11 @@ namespace BindingPractice_1209
     {
         public MainPage()
         {
+            TextWriter text = new TextWriter("I am alive");
+
             this.InitializeComponent();
+            this.DataContext = text;
+
         }
     }
 }
