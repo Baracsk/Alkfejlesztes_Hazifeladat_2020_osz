@@ -119,14 +119,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Constants.cs" />
-    <Compile Include="Coords.cs" />
-    <Compile Include="MainPageHandler.cs" />
+    <Compile Include="Classes\00 Constants.cs" />
+    <Compile Include="Classes\20 MainPageHandler.cs" />
+    <Compile Include="Classes\06 RobotModell.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Robot.cs" />
+    <Compile Include="Classes\05 IRobotModell.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

@@ -61,7 +61,7 @@
 
         <TextBox 
             Name ="SpeedValue"
-            Text ="{Binding SpeedText}"
+            Text ="{x:Bind PageHandler.SpeedText}"
             HorizontalAlignment="Left" 
             Grid.Row="4" 
             MinWidth="70"
@@ -75,7 +75,7 @@
 
         <TextBox 
             Name ="Positions"
-            Text ="{Binding PositionText}"
+            Text ="{x:Bind PageHandler.PositionText}"
             HorizontalAlignment="Left" 
             Grid.Row="6" 
             Grid.RowSpan="3"
@@ -125,7 +125,7 @@
             Minimum="-90"
             MinWidth="50"
             MaxWidth="100"
-            Value= "{Binding SteeringValue}"
+            Value= "{x:Bind PageHandler.SteeringValue}"
             VerticalAlignment="Bottom" 
             ValueChanged="RotationSlider_ValueChanged" 
              />
@@ -152,7 +152,6 @@
                 Name ="Reset"
                 Content="Reset" 
                 Grid.Row="2" 
-                
                 Height="30" 
                 MinWidth="50" 
                 Grid.Column="0" 

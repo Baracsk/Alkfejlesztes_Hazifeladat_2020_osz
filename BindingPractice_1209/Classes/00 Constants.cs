@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace BindingPractice_1209
 {
-    class Coords
+    static class Constants
     {
-
+        public const int SPEED_CHANGE_SCALE = 10;
+        public const int MAX_SPEED = 50;
     }
 }

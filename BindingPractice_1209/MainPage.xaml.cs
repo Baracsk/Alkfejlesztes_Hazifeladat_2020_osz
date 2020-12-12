@@ -22,15 +22,12 @@ namespace BindingPractice_1209
     public sealed partial class MainPage : Page
     {
         private int RotationAngle;
-        private MainPageHandler pageHandler;
 
+        public MainPageHandler PageHandler;
         public MainPage()
         {
-            pageHandler = new MainPageHandler(-20);
+            PageHandler = new MainPageHandler(0);
             this.InitializeComponent();
-
-            DataContext = pageHandler;
-
 
         }
 
@@ -49,11 +46,13 @@ namespace BindingPractice_1209
                 Angle = RotationAngle
             };
 
+            PageHandler.Steer();
+
         }
 
         private void Reset_Button_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            PageHandler.Reset();
         }
 
         private void Test_Button_Click(object sender, RoutedEventArgs e)
@@ -63,13 +62,12 @@ namespace BindingPractice_1209
 
         private void Brake_Button_Click(object sender, RoutedEventArgs e)
         {
-            pageHandler.Brake();
+            PageHandler.Brake();
         }
 
         private void Accelerate_Button_Click(object sender, RoutedEventArgs e)
         {
-            pageHandler.Accelerate();
+            PageHandler.Accelerate();
         }
-
     }
 }
