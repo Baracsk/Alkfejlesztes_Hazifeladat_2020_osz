@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Margin="3, 3, 3, 3">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="1*"/>
@@ -20,6 +20,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="*"/>
@@ -27,41 +28,146 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="0.2*"/>
         </Grid.ColumnDefinitions>
-        <TextBox Grid.Row="0" 
-                 Grid.Column="0" 
-                 Grid.ColumnSpan="5" 
-                 Text="ROBOT diagnostic application" 
-                 FontSize="20" 
-                 Background="ForestGreen" 
+
+        <Grid 
+            Grid.Row="0" 
+            Grid.Column="0" 
+            Grid.ColumnSpan="5"
+            Background="#FF3E3E3E">
+            <TextBlock 
+                Text="ROBOT diagnostic application" 
+                FontSize="20" 
+                FontWeight="Bold"
+                />
+        </Grid>
+
+        <TextBlock 
+            Grid.Row="3"
+            Grid.Column="0"
+            Text="Speed:"
+            FontSize="10"
+            VerticalAlignment="Center"
+            FontWeight="Bold"
                  />
-        
-        <TextBox Grid.Row="1"
-                 Grid.Column="0"
-                 Text="Steering:"
-                 FontSize="10"
-                 VerticalAlignment="Center"
+
+        <TextBlock 
+            Grid.Row="5"
+            Grid.Column="0"
+            Text="Position:"
+            FontSize="10"
+            VerticalAlignment="Center" 
+            FontWeight="Bold"
                  />
-        <TextBox Grid.Row="3"
-                 Grid.Column="0"
-                 Text="Speed:"
-                 FontSize="10"
-                 VerticalAlignment="Center"
-                 />
-        <TextBox Grid.Row="4"
-                 Grid.Column="0"
-                 Text="Position:"
-                 FontSize="10"
-                 VerticalAlignment="Center" 
-                 />
-        <Slider HorizontalAlignment="Left" 
-                Grid.ColumnSpan="2"
-                Maximum="90"
-                Minimum="-90"
-                Value="{Binding SteerValue}"
-                Margin="10,0,0,0" 
+
+        <TextBox 
+            HorizontalAlignment="Left" 
+            Grid.Row="4" 
+            MinWidth="70"
+            Margin="5, 0, 0, 0"
+            Text="TextBox" 
+            TextAlignment="Left"
+            FontSize="10"
+            TextWrapping="Wrap" 
+            VerticalAlignment="Center" 
+            FontWeight="Bold"
+            />
+
+        <TextBlock Grid.Row="1"
+            Grid.Column="2"
+            Text="Map:"
+            FontSize="10"
+            VerticalAlignment="Center" 
+            Grid.ColumnSpan="2" 
+            FontWeight="Bold"
+            />
+
+        <!-- steering wheel-->
+        <Image
+            Name="RotatingImage" 
+            Source="/Images/stwheel.jpg"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top" 
+            RenderTransformOrigin="0.5,0.5" 
+            Margin="35,35,35,35"
+            Stretch="Uniform" 
+            Grid.Column="1" 
+            Grid.Row="1" 
+            MinWidth="100"
+            Grid.RowSpan="3"
+            >
+            <Image.RenderTransform>
+                <RotateTransform  />
+            </Image.RenderTransform>
+        </Image>
+
+        <Slider 
+            Grid.Row="4"
+            Grid.Column="1"
+            x:Name="rotationSlider" 
+            Maximum="90" 
+            Minimum="-90"
+            MinWidth="50"
+            MaxWidth="100"
+            Value= "{Binding SteeringValue}"
+            VerticalAlignment="Bottom" 
+            ValueChanged="RotationSlider_ValueChanged" 
+             />
+
+        <!--Buttons-->
+        <Grid
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.RowSpan="2">
+
+            <Button 
+                Name ="Test"
+                Content="Test" 
                 Grid.Row="2" 
-                VerticalAlignment="Center" 
-                Width="150"/>
+                
+                Height="30" 
+                MinWidth="50" 
+                Grid.Column="0" 
+                VerticalAlignment="Bottom"
+                Margin="5,0,0,5" 
+                Click="Test_Button_Click"/>
+
+            <Button 
+                Name ="Reset"
+                Content="Reset" 
+                Grid.Row="2" 
+                
+                Height="30" 
+                MinWidth="50" 
+                Grid.Column="0" 
+                VerticalAlignment="Top"
+                Margin="5,15,0,5" 
+                Click="Reset_Button_Click"/>
+
+        </Grid>
+
+        <Button 
+            Name ="Accelerate"
+            Content="Accelerate" 
+            Grid.Row="6" 
+            Grid.Column="1" 
+            Height="30" 
+            MinWidth="80" 
+            HorizontalAlignment="Left"
+            Margin="5,5,0,5"
+            Click="Accelerate_Button_Click" 
+            Background="#33BEBEBE"/>
+
+        <Button 
+            Name ="Brake"
+            Content="Brake" 
+            Grid.Row="6" 
+            Grid.Column="1" 
+            HorizontalAlignment="Right"
+            Height="30" 
+            MinWidth="50" 
+            Margin="0,5,5,5"
+            Click="Brake_Button_Click" 
+            Background="#33FF0505"/>
 
     </Grid>
 </Page>

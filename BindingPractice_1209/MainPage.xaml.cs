@@ -18,18 +18,59 @@ using Windows.UI.Xaml.Navigation;
 
 namespace BindingPractice_1209
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+    
     public sealed partial class MainPage : Page
     {
+        private int RotationAngle;
+        private MainPageHandler pageHandler;
+
         public MainPage()
         {
-            TextWriter text = new TextWriter("I am alive");
-
+            pageHandler = new MainPageHandler(-20);
             this.InitializeComponent();
-            this.DataContext = text;
+
+            DataContext = pageHandler;
+
+            pageHandler.SteeringValue = 50;
 
         }
+
+        //
+
+        private void RotationSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            Slider slider = sender as Slider;
+            if (slider != null)
+            {
+                RotationAngle = (int)slider.Value;
+            }
+
+            RotatingImage.RenderTransform = new RotateTransform
+            {
+                Angle = RotationAngle
+            };
+
+        }
+
+        private void Reset_Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Test_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Brake_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Accelerate_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }
