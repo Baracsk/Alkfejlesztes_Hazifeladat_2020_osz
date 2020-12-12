@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BindingPractice_1209.Classes
+namespace DiagnosticApp.Classes
 {
     public class RobotModel : IRobotModel
     {
         private const int indexX = 0;
         private const int indexY = 0;
 
-        private double speedPercentage;
+        public double SpeedPercentage { get; set; }
         public double[] Coord { get; }
         private double steeringWheelAngle;
 
@@ -19,7 +19,7 @@ namespace BindingPractice_1209.Classes
         {
             if (speedPercentage >= 0 && speedPercentage <= 100)
             {
-                this.speedPercentage = speedPercentage;
+                this.SpeedPercentage = speedPercentage;
             }
             else
             {
@@ -31,7 +31,7 @@ namespace BindingPractice_1209.Classes
 
         public void Reset()
         {
-            speedPercentage = 0;
+            SpeedPercentage = 0;
             Coord[indexX] = 0;
             Coord[indexY] = 0;
             steeringWheelAngle = 0;
@@ -39,12 +39,12 @@ namespace BindingPractice_1209.Classes
 
         public void Accelerate()
         {
-            if ((speedPercentage += Constants.SPEED_CHANGE_SCALE) < 100) { }
+            if ((SpeedPercentage += Constants.SPEED_CHANGE_SCALE) < 100) { }
         }
 
         public void Brake()
         {
-            if ((speedPercentage -= Constants.SPEED_CHANGE_SCALE) > 0) { }
+            if ((SpeedPercentage -= Constants.SPEED_CHANGE_SCALE) > 0) { }
         }
 
         public void changeSteeringWheelAngle(double Angle)

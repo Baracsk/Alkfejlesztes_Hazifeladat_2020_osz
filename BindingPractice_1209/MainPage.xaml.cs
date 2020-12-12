@@ -16,19 +16,19 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
-namespace BindingPractice_1209
+namespace DiagnosticApp
 {
     
     public sealed partial class MainPage : Page
     {
         private int RotationAngle;
-
         public MainPageHandler PageHandler;
+
         public MainPage()
         {
-            PageHandler = new MainPageHandler(0);
             this.InitializeComponent();
 
+            PageHandler = new MainPageHandler();
         }
 
         //Event handling functions

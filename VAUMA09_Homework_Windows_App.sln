@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BindingPractice_1209", "BindingPractice_1209\BindingPractice_1209.csproj", "{1FF48142-E65E-4D13-98E2-E657E83E8558}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robot Diagnostic App", "BindingPractice_1209\Robot Diagnostic App.csproj", "{1FF48142-E65E-4D13-98E2-E657E83E8558}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
