@@ -1,4 +1,5 @@
-﻿using DiagnosticApp.Classes;
+﻿using BindingPractice_1209.Classes.View;
+using DiagnosticApp.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,44 +9,18 @@ using System.Threading.Tasks;
 
 namespace DiagnosticApp
 {
+    //This class contains the setting and getting method of the main page visual elements
     public class MainPageHandler : INotifyPropertyChanged
     {
-        //Binded to the steeringwheel function
-        private double _steeringValue { get; set; }
-        private string _positionText { get; set; }
-        private string _speedText { get; set; }
-        public double SteeringValue
-        {
-            get { return _steeringValue; }
-            set
-            {
-                _steeringValue = value;
-                OnPropertyChanged("SteeringValue");
-            }
-        }
-        public string PositionText
-        {
-            get { return _positionText; }
-            set
-            {
-                _positionText = value;
-                OnPropertyChanged("PositionText");
-            }
-        }
-        public string SpeedText
-        {
-            get { return _speedText; }
-            set
-            {
-                _speedText = value;
-                OnPropertyChanged("SpeedText");
-            }
-        }
-
+        //list for collecting coordinates through the way
         private List<Double[]> prevCoords;
 
-        public RobotModel robotModel;
+        //The used classes
+        public RobotModel RobotModel;
+        public SteeringWheelView SteeringWheel;
+        public ParameterTextView ParameterText;
 
+        //Propertychanged functions for updating the change of the values
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(string propertyName)
@@ -55,52 +30,52 @@ namespace DiagnosticApp
 
         public MainPageHandler(int speedPercentage = 0)
         {
-            PositionText = "none";
-            SpeedText = "none";
-            SteeringValue = 10;
-
-            robotModel = new RobotModel();
-            prevCoords = new List<double[]>();
+            RobotModel = new RobotModel();
+            SteeringWheel = new SteeringWheelView();
+            ParameterText = new ParameterTextView();
+            
         }
 
+        //writing the current position of the robot
         public void WritePosition()
         {
-            PositionText = "x: " + robotModel.Coord[0] + "\ny: " + robotModel.Coord[1];
-            OnPropertyChanged("PositionText");
+            ParameterText.WritePosition(
+                String.Format("{0}:0.00", RobotModel.Coord[0].ToString()),
+                String.Format("{0}:0.00", RobotModel.Coord[1].ToString())
+                );
         }
 
+        //writing the current speed of the robot
         public void WriteSpeed()
         {
-            SpeedText = String.Format("{0:0.00}", robotModel.SpeedPercentage.ToString()) + " m/s";
-            OnPropertyChanged("SpeedText");
+            ParameterText.WriteSpeed(String.Format("{0:0.00}", RobotModel.SpeedPercentage.ToString()));
         }
 
+        //Handling acceleration from the display
         public void Accelerate()
         {
-            robotModel.Accelerate();
+            RobotModel.Accelerate();
         }
 
+        //Handling braking from the display
         public void Brake()
         {
-            robotModel.Brake();
+            RobotModel.Brake();
         }
 
+        //updating the current steering value
         public void Steer()
         {
-            robotModel.changeSteeringWheelAngle(SteeringValue);
+            RobotModel.changeSteeringWheelAngle(SteeringWheel.SteeringValue);
         }
 
+
+        //resetting the values of the app and the robot modell
         public void Reset()
         {
-            PositionText = "reset happened";
-            OnPropertyChanged("PositionText");
-
-            SpeedText = "reset happened";
-            OnPropertyChanged("SpeedText");
-
-            SteeringValue = 0;
-            OnPropertyChanged("SteeringValue");
-            robotModel.Reset();
+            ParameterText.Reset();
+            SteeringWheel.Reset();
+            RobotModel.Reset();
 
         }
 

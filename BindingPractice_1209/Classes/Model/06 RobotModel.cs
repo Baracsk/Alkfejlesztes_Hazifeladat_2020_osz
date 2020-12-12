@@ -8,6 +8,7 @@ namespace DiagnosticApp.Classes
 {
     public class RobotModel : IRobotModel
     {
+        //indeces for the position array
         private const int indexX = 0;
         private const int indexY = 0;
 
@@ -29,6 +30,7 @@ namespace DiagnosticApp.Classes
             this.steeringWheelAngle = steeringWheelAngle;
         }
 
+        //resetting all the values
         public void Reset()
         {
             SpeedPercentage = 0;
@@ -37,21 +39,23 @@ namespace DiagnosticApp.Classes
             steeringWheelAngle = 0;
         }
 
+        //increasing the speed
         public void Accelerate()
         {
             if ((SpeedPercentage += Constants.SPEED_CHANGE_SCALE) < 100) { }
         }
 
+        //decreasing the speed
         public void Brake()
         {
             if ((SpeedPercentage -= Constants.SPEED_CHANGE_SCALE) > 0) { }
         }
 
+        //turning the steering wheel
         public void changeSteeringWheelAngle(double Angle)
         {
             steeringWheelAngle = Angle;
         }
-
 
     }
 }

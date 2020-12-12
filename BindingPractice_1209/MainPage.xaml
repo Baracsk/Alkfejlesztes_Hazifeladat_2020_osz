@@ -61,7 +61,7 @@
 
         <TextBlock 
             Name ="SpeedValue"
-            Text ="{x:Bind PageHandler.SpeedText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Text ="{x:Bind PageHandler.ParameterText.SpeedText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             HorizontalAlignment="Left" 
             Grid.Row="4" 
             MinWidth="70"
@@ -75,7 +75,7 @@
 
         <TextBox 
             Name ="Positions"
-            Text ="{x:Bind PageHandler.PositionText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Text ="{x:Bind PageHandler.ParameterText.PositionText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             HorizontalAlignment="Left" 
             Grid.Row="6" 
             Grid.RowSpan="3"
@@ -125,7 +125,7 @@
             Minimum="-90"
             MinWidth="50"
             MaxWidth="100"
-            Value= "{x:Bind PageHandler.SteeringValue, Mode=TwoWay}"
+            Value= "{x:Bind PageHandler.SteeringWheel.SteeringValue, Mode=TwoWay}"
             VerticalAlignment="Bottom" 
             ValueChanged="RotationSlider_ValueChanged" 
              />
