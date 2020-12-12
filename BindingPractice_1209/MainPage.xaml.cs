@@ -31,11 +31,10 @@ namespace BindingPractice_1209
 
             DataContext = pageHandler;
 
-            pageHandler.SteeringValue = 50;
 
         }
 
-        //
+        //Event handling functions
 
         private void RotationSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
@@ -54,22 +53,22 @@ namespace BindingPractice_1209
 
         private void Reset_Button_Click(object sender, RoutedEventArgs e)
         {
-            
+            throw new NotImplementedException();
         }
 
         private void Test_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            throw new NotImplementedException();
         }
 
         private void Brake_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            pageHandler.Brake();
         }
 
         private void Accelerate_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            pageHandler.Accelerate();
         }
 
     }

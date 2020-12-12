@@ -60,16 +60,33 @@
                  />
 
         <TextBox 
+            Name ="SpeedValue"
+            Text ="{Binding SpeedText}"
             HorizontalAlignment="Left" 
             Grid.Row="4" 
             MinWidth="70"
             Margin="5, 0, 0, 0"
-            Text="TextBox" 
             TextAlignment="Left"
             FontSize="10"
             TextWrapping="Wrap" 
             VerticalAlignment="Center" 
-            FontWeight="Bold"
+            FontStyle="Italic"
+            />
+
+        <TextBox 
+            Name ="Positions"
+            Text ="{Binding PositionText}"
+            HorizontalAlignment="Left" 
+            Grid.Row="6" 
+            Grid.RowSpan="3"
+            MinWidth="70"
+            MinHeight="100"
+            Margin="5, 0, 0, 0"
+            TextAlignment="Left"
+            FontSize="10"
+            TextWrapping="Wrap" 
+            VerticalAlignment="Center" 
+            FontStyle="Italic"
             />
 
         <TextBlock Grid.Row="1"
