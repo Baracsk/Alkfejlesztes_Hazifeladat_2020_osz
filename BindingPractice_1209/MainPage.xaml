@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Margin="3, 3, 3, 3">
+    <Grid Margin="3,3,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="1*"/>
@@ -29,73 +29,40 @@
             <ColumnDefinition Width="0.2*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid 
-            Grid.Row="0" 
-            Grid.Column="0" 
-            Grid.ColumnSpan="5"
-            Background="#FF3E3E3E">
-            <TextBlock 
-                Text="ROBOT diagnostic application" 
-                FontSize="20" 
-                FontWeight="Bold"
-                />
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="#FF3E3E3E">
+            <TextBlock Text="ROBOT diagnostic application" FontSize="20" FontWeight="Bold"/>
         </Grid>
 
-        <TextBlock 
-            Grid.Row="3"
-            Grid.Column="0"
-            Text="Speed:"
-            FontSize="10"
-            VerticalAlignment="Center"
-            FontWeight="Bold"
-                 />
+        <Grid Grid.Row="1" Grid.RowSpan="8" Grid.Column="0" Background="#FF00151E" />
+        <Grid Grid.Row="1" Grid.RowSpan="8" Grid.Column="1" Background="Transparent" BorderThickness="1" BorderBrush="White" />
+
+        <TextBlock x:Name="Speed" Grid.Row="3" Grid.Column="0" Text="Speed:" FontSize="13" VerticalAlignment="Center" FontWeight="Bold" />
+        <TextBlock x:Name="Position" Grid.Row="5" Grid.Column="0" Text="Position" FontSize="13" VerticalAlignment="Center"  FontWeight="Bold" />
+
+        <TextBlock Name ="SpeedValueOut" Text ="{x:Bind PageHandler.ParameterText.SpeedText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"  Grid.Row="4"  MinWidth="70" Margin="5, 0, 0, 0" TextAlignment="Left" FontSize="13" TextWrapping="Wrap"  VerticalAlignment="Center" FontStyle="Italic" />
+
+        <TextBox Name ="PositionOut" Text ="{x:Bind PageHandler.ParameterText.PositionText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left"  Grid.Row="6"  Grid.RowSpan="3" MinWidth="70" MinHeight="100" Margin="5, 0, 0, 0" TextAlignment="Left" FontSize="10" TextWrapping="Wrap" VerticalAlignment="Center"  FontStyle="Italic"/>
 
         <TextBlock 
-            Grid.Row="5"
-            Grid.Column="0"
-            Text="Position:"
-            FontSize="10"
-            VerticalAlignment="Center" 
-            FontWeight="Bold"
-                 />
-
-        <TextBlock 
-            Name ="SpeedValue"
-            Text ="{x:Bind PageHandler.ParameterText.SpeedText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            HorizontalAlignment="Left" 
-            Grid.Row="4" 
-            MinWidth="70"
-            Margin="5, 0, 0, 0"
-            TextAlignment="Left"
-            FontSize="10"
-            TextWrapping="Wrap" 
-            VerticalAlignment="Center" 
-            FontStyle="Italic"
-            />
-
-        <TextBox 
-            Name ="Positions"
-            Text ="{x:Bind PageHandler.ParameterText.PositionText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            HorizontalAlignment="Left" 
-            Grid.Row="6" 
-            Grid.RowSpan="3"
-            MinWidth="70"
-            MinHeight="100"
-            Margin="5, 0, 0, 0"
-            TextAlignment="Left"
-            FontSize="10"
-            TextWrapping="Wrap" 
-            VerticalAlignment="Center" 
-            FontStyle="Italic"
-            />
-
-        <TextBlock Grid.Row="1"
+            x:Name="Map"
+            Grid.Row="1"
             Grid.Column="2"
             Text="Map:"
-            FontSize="10"
+            FontSize="15"
             VerticalAlignment="Center" 
             Grid.ColumnSpan="2" 
             FontWeight="Bold"
+            />
+
+        <TextBlock 
+            x:Name="Pedals"
+            Grid.Row="5"
+            Grid.Column="1"
+            Text="Pedals:"
+            FontSize="15"
+            VerticalAlignment="Center" 
+            Grid.ColumnSpan="2" 
+
             />
 
         <!-- steering wheel-->
@@ -183,7 +150,31 @@
             MinWidth="50" 
             Margin="0,5,5,5"
             Click="Brake_Button_Click" 
-            Background="#33FF0505"/>
+            Background="#FF1E1D1D" />
+
+        <Button 
+            Name ="EStop"
+            Content="E-Stop" 
+            Grid.Row="7" 
+            Grid.Column="1" 
+            HorizontalAlignment="Center"
+            Height="30" 
+            MinWidth="100" 
+            Margin="0,5,5,5"
+            Click="Emergency_Button_Click" 
+            Background="#FFC70707" />
+
+        <ToggleSwitch 
+            x:Name="GearShift"
+            Grid.Column="1" 
+            Header="Gear shift:" 
+            Margin="5,0,0,0" Grid.Row="8" 
+            VerticalAlignment="Center"
+            OffContent="Fw"
+            OnContent="Rev"
+            IsOn="{x:Bind PageHandler.GearShift.GearShiftValue, Mode=TwoWay}"
+            Toggled="Gearshift_Toggled"
+            />
 
     </Grid>
 </Page>

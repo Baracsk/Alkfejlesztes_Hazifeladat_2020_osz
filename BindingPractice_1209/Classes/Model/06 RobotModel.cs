@@ -12,9 +12,11 @@ namespace DiagnosticApp.Classes
         private const int indexX = 0;
         private const int indexY = 0;
 
-        public double SpeedPercentage { get; set; }
-        public double[] Coord { get; }
+        public double SpeedPercentage { get; set; } 
+        public double[] Coord { get; set; }
+
         private double steeringWheelAngle;
+        private bool isReverse;
 
         public RobotModel(double speedPercentage = 0, double X = 0, double Y = 0, int steeringWheelAngle = 0)
         {
@@ -37,25 +39,39 @@ namespace DiagnosticApp.Classes
             Coord[indexX] = 0;
             Coord[indexY] = 0;
             steeringWheelAngle = 0;
+            isReverse = false;
         }
 
         //increasing the speed
         public void Accelerate()
         {
             if ((SpeedPercentage += Constants.SPEED_CHANGE_SCALE) < 100) { }
+            else SpeedPercentage = 100;
         }
 
         //decreasing the speed
         public void Brake()
         {
             if ((SpeedPercentage -= Constants.SPEED_CHANGE_SCALE) > 0) { }
+            else SpeedPercentage = 0;
         }
 
-        //turning the steering wheel
+        //Immediate stopping of the robot
+        public void E_Stop()
+        {
+            SpeedPercentage = 0;
+        }
+
+        //Turning the steering wheel
         public void changeSteeringWheelAngle(double Angle)
         {
             steeringWheelAngle = Angle;
         }
 
+        //Changing the gearshift to reverse mode
+        public void IsReverse(bool reverse)
+        {
+            this.isReverse = reverse;
+        }
     }
 }

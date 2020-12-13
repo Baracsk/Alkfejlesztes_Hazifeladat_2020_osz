@@ -13,8 +13,8 @@ namespace BindingPractice_1209.Classes.View
         private const string DEFAULT_POSITION_TEXT = "x: 0 y: 0";
         private const string DEFAULT_SPEED_TEXT = "0 m/s";
 
-        //list for collecting coordinates through the way
-        private List<Double[]> prevCoords;
+        //Array for collecting the previous coordinates
+        private Queue<string> positionTextList;
 
         private string _positionText { get; set; }
         private string _speedText { get; set; }
@@ -42,6 +42,9 @@ namespace BindingPractice_1209.Classes.View
         {
             PositionText = postext;
             SpeedText = speedtext;
+
+            positionTextList = new Queue<string>();
+            positionTextList.Enqueue(postext);
         }
 
         //Propertychanged functions for updating the change of the values
@@ -54,8 +57,30 @@ namespace BindingPractice_1209.Classes.View
 
         public void WritePosition(string X, string Y)
         {
-            PositionText = "x: " + X + " y: " + Y;
+            string OutPutText = "";
+
+            UpdatePositionTextList("x: " + X + " y: " + Y);
+
+            foreach (string element in positionTextList)
+            {
+                OutPutText += element + '\n';
+            }
+
+            PositionText = OutPutText;
             OnPropertyChanged("PositionText");
+
+            
+            
+        }
+
+        public void UpdatePositionTextList(string newText)
+        {
+            if (positionTextList.Count() >= 10)
+            {
+                positionTextList.Dequeue();
+            }
+
+            positionTextList.Enqueue(newText);
         }
 
         //writing the current speed of the robot
@@ -73,6 +98,7 @@ namespace BindingPractice_1209.Classes.View
 
             SpeedText = "0 m/s";
             OnPropertyChanged("SpeedText");
+            positionTextList.Clear();
 
         }
     }

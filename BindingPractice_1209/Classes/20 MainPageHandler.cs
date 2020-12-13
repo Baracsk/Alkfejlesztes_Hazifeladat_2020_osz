@@ -10,29 +10,20 @@ using System.Threading.Tasks;
 namespace DiagnosticApp
 {
     //This class contains the setting and getting method of the main page visual elements
-    public class MainPageHandler : INotifyPropertyChanged
-    {
-        //list for collecting coordinates through the way
-        private List<Double[]> prevCoords;
-
+    public class MainPageHandler 
+    { 
         //The used classes
         public RobotModel RobotModel;
         public SteeringWheelView SteeringWheel;
         public ParameterTextView ParameterText;
+        public GearShiftView GearShift;
 
-        //Propertychanged functions for updating the change of the values
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public MainPageHandler(int speedPercentage = 0)
+        public MainPageHandler()
         {
             RobotModel = new RobotModel();
             SteeringWheel = new SteeringWheelView();
             ParameterText = new ParameterTextView();
+            GearShift = new GearShiftView();
             
         }
 
@@ -40,8 +31,16 @@ namespace DiagnosticApp
         public void WritePosition()
         {
             ParameterText.WritePosition(
-                String.Format("{0}:0.00", RobotModel.Coord[0].ToString()),
-                String.Format("{0}:0.00", RobotModel.Coord[1].ToString())
+                String.Format("{0:0.00}", RobotModel.Coord[0]),
+                String.Format("{0:0.00}", RobotModel.Coord[1])
+                );
+        }
+
+        public void WritePosition(double[] coord)
+        {
+            ParameterText.WritePosition(
+                String.Format("{0:0.00}", coord[0]),
+                String.Format("{0:0.00}", coord[1])
                 );
         }
 
@@ -70,13 +69,24 @@ namespace DiagnosticApp
         }
 
 
+        //Stops the robot immediately
+        public void E_Stop()
+        {
+            RobotModel.E_Stop();
+        }
+
+        public void ChangeShift(bool value)
+        {
+            RobotModel.IsReverse(value);
+        }
+
         //resetting the values of the app and the robot modell
         public void Reset()
         {
             ParameterText.Reset();
             SteeringWheel.Reset();
             RobotModel.Reset();
-
+            GearShift.Reset();
         }
 
     }

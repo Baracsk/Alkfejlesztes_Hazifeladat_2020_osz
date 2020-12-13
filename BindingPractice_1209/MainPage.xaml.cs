@@ -33,6 +33,7 @@ namespace DiagnosticApp
 
         //Event handling functions
 
+        //Connecting the slider to the steeringwheel image
         private void RotationSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             Slider slider = sender as Slider;
@@ -47,9 +48,9 @@ namespace DiagnosticApp
             };
 
             PageHandler.Steer();
-
         }
 
+        //
         private void Reset_Button_Click(object sender, RoutedEventArgs e)
         {
             PageHandler.Reset();
@@ -58,6 +59,9 @@ namespace DiagnosticApp
         private void Test_Button_Click(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
+            //**********TEST**************************
+            //double[] Position = { 0.1110, 0.11101 };
+            //PageHandler.WritePosition( Position ); 
         }
 
         private void Brake_Button_Click(object sender, RoutedEventArgs e)
@@ -68,6 +72,16 @@ namespace DiagnosticApp
         private void Accelerate_Button_Click(object sender, RoutedEventArgs e)
         {
             PageHandler.Accelerate();
+        }
+
+        private void Emergency_Button_Click(object sender, RoutedEventArgs e)
+        {
+            PageHandler.E_Stop();
+        }
+
+        private void Gearshift_Toggled(object sender, RoutedEventArgs e)
+        {
+            PageHandler.ChangeShift(GearShift.IsOn);
         }
     }
 }
