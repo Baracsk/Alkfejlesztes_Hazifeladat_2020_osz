@@ -58,10 +58,10 @@ namespace DiagnosticApp
 
         private void Test_Button_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
             //**********TEST**************************
-            //double[] Position = { 0.1110, 0.11101 };
-            //PageHandler.WritePosition( Position ); 
+            double[] Position = { 0.1110, 0.11101 };
+            PageHandler.WritePosition( Position ); 
         }
 
         private void Brake_Button_Click(object sender, RoutedEventArgs e)

@@ -1,4 +1,4 @@
-﻿using BindingPractice_1209.Classes.View;
+﻿using RobotDiagnosticApp.Classes.View;
 using DiagnosticApp.Classes;
 using System;
 using System.Collections.Generic;

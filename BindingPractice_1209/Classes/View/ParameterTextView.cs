@@ -1,11 +1,12 @@
-﻿using System;
+﻿using BindingPractice_1209.Classes.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BindingPractice_1209.Classes.View
+namespace RobotDiagnosticApp.Classes.View
 {
     //Class for handling the coordinate and speed texts on the display
     public class ParameterTextView : INotifyPropertyChanged
@@ -38,6 +39,8 @@ namespace BindingPractice_1209.Classes.View
             }
         }
 
+        private ParameterTextVM TextVM;
+
         public ParameterTextView(string postext = DEFAULT_POSITION_TEXT, string speedtext = DEFAULT_SPEED_TEXT)
         {
             PositionText = postext;
@@ -45,6 +48,8 @@ namespace BindingPractice_1209.Classes.View
 
             positionTextList = new Queue<string>();
             positionTextList.Enqueue(postext);
+
+            TextVM = new ParameterTextVM(PositionText);
         }
 
         //Propertychanged functions for updating the change of the values
@@ -56,21 +61,9 @@ namespace BindingPractice_1209.Classes.View
         }
 
         public void WritePosition(string X, string Y)
-        {
-            string OutPutText = "";
-
-            UpdatePositionTextList("x: " + X + " y: " + Y);
-
-            foreach (string element in positionTextList)
-            {
-                OutPutText += element + '\n';
-            }
-
-            PositionText = OutPutText;
+        { 
+            PositionText = TextVM.WritePosition(X, Y);
             OnPropertyChanged("PositionText");
-
-            
-            
         }
 
         public void UpdatePositionTextList(string newText)

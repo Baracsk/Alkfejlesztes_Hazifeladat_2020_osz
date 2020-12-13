@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RobotDiagnosticApp.Classes.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,8 @@ namespace DiagnosticApp.Classes
         private double steeringWheelAngle;
         private bool isReverse;
 
+        private RobotCommumicationInterfaceModel communicationInterface;
+
         public RobotModel(double speedPercentage = 0, double X = 0, double Y = 0, int steeringWheelAngle = 0)
         {
             if (speedPercentage >= 0 && speedPercentage <= 100)
@@ -28,8 +31,13 @@ namespace DiagnosticApp.Classes
             {
                 throw new ArgumentException("speeding value should be between 0 and 100");
             }
+
             Coord = new double[] { X, Y };
             this.steeringWheelAngle = steeringWheelAngle;
+
+            this.isReverse = false;
+
+            communicationInterface = new RobotCommumicationInterfaceModel();
         }
 
         //resetting all the values

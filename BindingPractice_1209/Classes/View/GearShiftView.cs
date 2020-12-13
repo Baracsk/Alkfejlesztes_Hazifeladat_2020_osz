@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BindingPractice_1209.Classes.View
+namespace RobotDiagnosticApp.Classes.View
 {
     public class GearShiftView :INotifyPropertyChanged
     {
