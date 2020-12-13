@@ -1,6 +1,7 @@
 ﻿using RobotDiagnosticApp.Classes.View;
 using DiagnosticApp.Classes;
 using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -87,6 +88,7 @@ namespace DiagnosticApp
             SteeringWheel.Reset();
             RobotModel.Reset();
             GearShift.Reset();
+            
         }
 
     }

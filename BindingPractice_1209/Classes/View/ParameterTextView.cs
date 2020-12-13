@@ -62,18 +62,10 @@ namespace RobotDiagnosticApp.Classes.View
 
         public void WritePosition(string X, string Y)
         { 
-            PositionText = TextVM.WritePosition(X, Y);
+            Task<string> WriteposTask = Task.Run(() =>  TextVM.WritePosition(X, Y));
+
+            PositionText = WriteposTask.Result; 
             OnPropertyChanged("PositionText");
-        }
-
-        public void UpdatePositionTextList(string newText)
-        {
-            if (positionTextList.Count() >= 10)
-            {
-                positionTextList.Dequeue();
-            }
-
-            positionTextList.Enqueue(newText);
         }
 
         //writing the current speed of the robot
