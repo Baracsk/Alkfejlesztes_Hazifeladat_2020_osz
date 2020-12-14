@@ -34,14 +34,14 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.RowSpan="8" Grid.Column="0" Background="#FF00151E" />
-        <Grid Grid.Row="1" Grid.RowSpan="8" Grid.Column="1" Background="Transparent" BorderThickness="1" BorderBrush="White" />
+        <Grid Grid.Row="1" Grid.RowSpan="8" Grid.Column="1" Grid.ColumnSpan="4" Background="Transparent" BorderThickness="1" BorderBrush="White" />
 
         <TextBlock x:Name="Speed" Grid.Row="3" Grid.Column="0" Text="Speed:" FontSize="13" VerticalAlignment="Center" FontWeight="Bold" />
         <TextBlock x:Name="Position" Grid.Row="5" Grid.Column="0" Text="Position" FontSize="13" VerticalAlignment="Center"  FontWeight="Bold" />
 
         <TextBlock Name ="SpeedValueOut" Text ="{x:Bind PageHandler.ParameterText.SpeedText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"  Grid.Row="4"  MinWidth="70" Margin="5, 0, 0, 0" TextAlignment="Left" FontSize="13" TextWrapping="Wrap"  VerticalAlignment="Center" FontStyle="Italic" />
 
-        <TextBox Name ="PositionOut" Text ="{x:Bind PageHandler.ParameterText.PositionText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left"  Grid.Row="6"  Grid.RowSpan="3" MinWidth="70" MinHeight="100" Margin="5, 0, 0, 0" TextAlignment="Left" FontSize="10" TextWrapping="Wrap" VerticalAlignment="Center"  FontStyle="Italic"/>
+        <TextBox IsReadOnly="True" Name ="PositionOut" Text ="{x:Bind PageHandler.ParameterText.PositionText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left"  Grid.Row="6"  Grid.RowSpan="3" MinWidth="70" MinHeight="100" Margin="5, 0, 0, 0" TextAlignment="Left" FontSize="10" TextWrapping="Wrap" VerticalAlignment="Center"  FontStyle="Italic"/>
 
         <TextBlock 
             x:Name="Map"
@@ -88,8 +88,8 @@
             x:Name="rotationSlider" 
             Grid.Row="4"
             Grid.Column="1"
-            Maximum="90" 
-            Minimum="-90"
+            Maximum="180" 
+            Minimum="-180"
             MinWidth="50"
             MaxWidth="100"
             Value= "{x:Bind PageHandler.SteeringWheel.SteeringValue, Mode=TwoWay}"
@@ -175,6 +175,32 @@
             IsOn="{x:Bind PageHandler.GearShift.GearShiftValue, Mode=TwoWay}"
             Toggled="Gearshift_Toggled"
             />
+
+        <Grid Grid.Row="2" Background="#FF5B5B5B" Grid.Column="2" Grid.RowSpan="7" Grid.ColumnSpan="2">
+
+            <Canvas Width="250" Height="250" Background="Beige">
+
+                <Line Stroke="Red" X1="0" X2="250" Y1="125" Y2="125"></Line>
+                <Line Stroke="Red" X1="125" X2="125" Y1="0" Y2="250"></Line>
+
+                <Rectangle Name="Car" 
+                           Width="10" 
+                           Height="20" 
+                           Canvas.Left="{x:Bind PageHandler.DisplayRobot.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                           Canvas.Top="{x:Bind PageHandler.DisplayRobot.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                           RadiusX="1.5" 
+                           RadiusY="1.5"
+                           Fill="#FF521681" 
+                           RenderTransformOrigin="0.5,0.5">
+
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform Rotation="{x:Bind PageHandler.DisplayRobot.Orientation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+
+
+            </Canvas>
+        </Grid>
 
     </Grid>
 </Page>

@@ -123,7 +123,9 @@
     <Compile Include="Classes\20 MainPageHandler.cs" />
     <Compile Include="Classes\Model\06 RobotModel.cs" />
     <Compile Include="Classes\Model\RobotCommumicationInterfaceModel.cs" />
+    <Compile Include="Classes\ViewModel\DisplayRobotVM.cs" />
     <Compile Include="Classes\ViewModel\ParameterTextVM.cs" />
+    <Compile Include="Classes\View\DisplayRobotView.cs" />
     <Compile Include="Classes\View\GearShiftView.cs" />
     <Compile Include="Classes\View\ParameterTextView.cs" />
     <Compile Include="Classes\View\SteeringWheelView.cs" />

@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BindingPractice_1209.Classes.View;
 
 namespace DiagnosticApp
 {
@@ -18,14 +19,21 @@ namespace DiagnosticApp
         public SteeringWheelView SteeringWheel;
         public ParameterTextView ParameterText;
         public GearShiftView GearShift;
+        public DisplayRobotView DisplayRobot;
 
         public MainPageHandler()
         {
-            RobotModel = new RobotModel();
-            SteeringWheel = new SteeringWheelView();
-            ParameterText = new ParameterTextView();
-            GearShift = new GearShiftView();
-            
+            Task<RobotModel> T1 = Task.Run(()=>  new RobotModel());
+            Task<SteeringWheelView> T2 = Task.Run(() => new SteeringWheelView());
+            Task<ParameterTextView> T3 = Task.Run(() => new ParameterTextView());
+            Task<GearShiftView> T4 = Task.Run(() => new GearShiftView());
+            Task<DisplayRobotView> T5 = Task.Run(() => new DisplayRobotView());
+
+            RobotModel = T1.Result;
+            SteeringWheel = T2.Result;
+            ParameterText = T3.Result;
+            GearShift = T4.Result;
+            DisplayRobot = T5.Result;
         }
 
         //writing the current position of the robot
@@ -67,6 +75,7 @@ namespace DiagnosticApp
         public void Steer()
         {
             RobotModel.changeSteeringWheelAngle(SteeringWheel.SteeringValue);
+            DisplayRobot.TurnToDegree((int)SteeringWheel.SteeringValue);
         }
 
 
@@ -88,7 +97,7 @@ namespace DiagnosticApp
             SteeringWheel.Reset();
             RobotModel.Reset();
             GearShift.Reset();
-            
+            DisplayRobot.Reset();
         }
 
     }
