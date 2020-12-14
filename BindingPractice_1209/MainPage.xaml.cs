@@ -60,8 +60,7 @@ namespace DiagnosticApp
         {
             //throw new NotImplementedException();
             //**********TEST**************************
-            double[] Position = { 0.1110, 0.11101 };
-            PageHandler.WritePosition( Position ); 
+            //PageHandler.DisplayRobot.MoveForward(PageHandler.RobotModel.isReverse);
         }
 
         private void Brake_Button_Click(object sender, RoutedEventArgs e)

@@ -17,7 +17,7 @@ namespace DiagnosticApp.Classes
         public double[] Coord { get; set; }
 
         private double steeringWheelAngle;
-        private bool isReverse;
+        public bool isReverse;
 
         private RobotCommumicationInterfaceModel communicationInterface;
 
