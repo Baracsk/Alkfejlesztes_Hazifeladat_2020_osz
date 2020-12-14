@@ -60,7 +60,7 @@ namespace RobotDiagnosticApp.Classes.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void WritePosition(string X, string Y)
+        public void WritePosition(double X, double Y)
         { 
             Task<string> WriteposTask = Task.Run(() =>  TextVM.WritePosition(X, Y));
 

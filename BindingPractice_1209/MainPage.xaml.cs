@@ -13,6 +13,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using BindingPractice_1209.Classes;
+using System.Threading.Tasks;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -24,11 +26,13 @@ namespace DiagnosticApp
         private int RotationAngle;
         public MainPageHandler PageHandler;
 
+
+
         public MainPage()
         {
             this.InitializeComponent();
-
             PageHandler = new MainPageHandler();
+            
         }
 
         //Event handling functions
@@ -60,7 +64,7 @@ namespace DiagnosticApp
         {
             //throw new NotImplementedException();
             //**********TEST**************************
-            //PageHandler.DisplayRobot.MoveForward(PageHandler.RobotModel.isReverse);
+            PageHandler.MiniMap.MoveForward(PageHandler.RobotModel.Reverse);
         }
 
         private void Brake_Button_Click(object sender, RoutedEventArgs e)

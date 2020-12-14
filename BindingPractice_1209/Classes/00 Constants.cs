@@ -10,5 +10,6 @@ namespace DiagnosticApp
     {
         public const int SPEED_CHANGE_SCALE = 10;
         public const int MAX_SPEED = 50;
+        public const int SYSTEM_TICK_MS = 100;
     }
 }

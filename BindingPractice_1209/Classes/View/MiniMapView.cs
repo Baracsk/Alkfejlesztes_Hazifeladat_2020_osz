@@ -5,10 +5,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using Windows.UI.Core;
 
 namespace BindingPractice_1209.Classes.View
 {
-    public class DisplayRobotView : INotifyPropertyChanged
+    public class MiniMapView : INotifyPropertyChanged
     {
         
         public int X { get; set; }
@@ -20,21 +22,29 @@ namespace BindingPractice_1209.Classes.View
 
         public void OnPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+               PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
         }
 
-        public DisplayRobotView(int x = 0, int y = 0, int orientation = 0)
+        public MiniMapView(int x = 0, int y = 0, int orientation = 0)
         { 
-            X = DisplayRobotVM.GetDisplayedX(x);
-            Y = DisplayRobotVM.GetDisplayedY(y);
+            X = MiniMapVM.GetDisplayedX(x);
+            Y = MiniMapVM.GetDisplayedY(y);
 
             Orientation = orientation;
         }
 
+        public void Update(double X, double Y, int orientation)
+        {
+            GoToPoint((int)X, (int)Y);
+            TurnToDegree(orientation);
+        }
+
         public void GoToPoint(int x, int y)
         {
-            X = DisplayRobotVM.GetDisplayedX(x);
-            Y = DisplayRobotVM.GetDisplayedY(y);
+            X = MiniMapVM.GetDisplayedX(x);
+            Y = MiniMapVM.GetDisplayedY(y);
 
             OnPropertyChanged("X");
             OnPropertyChanged("Y");
@@ -42,33 +52,32 @@ namespace BindingPractice_1209.Classes.View
 
         public void TurnToDegree (int degree)
         {
-            Orientation = DisplayRobotVM.ScaleDegreeTo360(degree);
+            Orientation = MiniMapVM.ScaleDegreeTo360(degree);
 
             OnPropertyChanged("Orientation");
         }
 
-        /*public void MoveForward(bool isReverse)
+        public void MoveForward(bool isReverse)
         {
             int sign = (isReverse) ? -1 : 1;
-            DisplayRobotVM.MoveForward(Orientation, out int newX, out int newY);
+            MiniMapVM.MoveForward(Orientation, out int newX, out int newY);
             X += sign*newX;
             Y -= sign*newY;
 
             OnPropertyChanged("X");
             OnPropertyChanged("Y");
-        }*/
+        }
 
         public void Reset()
         {
 
-            X = DisplayRobotVM.GetDisplayedX(0);
-            Y = DisplayRobotVM.GetDisplayedY(0);
+            X = MiniMapVM.GetDisplayedX(0);
+            Y = MiniMapVM.GetDisplayedY(0);
 
             Orientation = 0;
 
             OnPropertyChanged("X");
             OnPropertyChanged("Y");
-
             OnPropertyChanged("Orientation");
 
         }

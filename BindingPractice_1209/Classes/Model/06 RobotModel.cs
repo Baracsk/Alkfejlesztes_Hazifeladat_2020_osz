@@ -16,12 +16,13 @@ namespace DiagnosticApp.Classes
         public double SpeedPercentage { get; set; } 
         public double[] Coord { get; set; }
 
-        private double steeringWheelAngle;
-        public bool isReverse;
+        public double SteeringWheelAngle { get; set; }
+        public int Orientation { get; set; }
+        public bool Reverse { get; set; }
 
         private RobotCommumicationInterfaceModel communicationInterface;
 
-        public RobotModel(double speedPercentage = 0, double X = 0, double Y = 0, int steeringWheelAngle = 0)
+        public RobotModel(double speedPercentage = 0, double X = 0, double Y = 0, int steeringWheelAngle = 0, int orientation = 0)
         {
             if (speedPercentage >= 0 && speedPercentage <= 100)
             {
@@ -33,9 +34,10 @@ namespace DiagnosticApp.Classes
             }
 
             Coord = new double[] { X, Y };
-            this.steeringWheelAngle = steeringWheelAngle;
+            this.SteeringWheelAngle = steeringWheelAngle;
 
-            this.isReverse = false;
+            this.Reverse = false;
+            this.Orientation = orientation;
 
             communicationInterface = new RobotCommumicationInterfaceModel();
         }
@@ -46,8 +48,8 @@ namespace DiagnosticApp.Classes
             SpeedPercentage = 0;
             Coord[indexX] = 0;
             Coord[indexY] = 0;
-            steeringWheelAngle = 0;
-            isReverse = false;
+            SteeringWheelAngle = 0;
+            Reverse = false;
         }
 
         //increasing the speed
@@ -73,13 +75,13 @@ namespace DiagnosticApp.Classes
         //Turning the steering wheel
         public void changeSteeringWheelAngle(double Angle)
         {
-            steeringWheelAngle = Angle;
+            SteeringWheelAngle = Angle;
         }
 
         //Changing the gearshift to reverse mode
         public void IsReverse(bool reverse)
         {
-            this.isReverse = reverse;
+            this.Reverse = reverse;
         }
     }
 }

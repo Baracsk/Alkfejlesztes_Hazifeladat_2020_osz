@@ -16,11 +16,11 @@ namespace BindingPractice_1209.Classes.ViewModel
             positionTextList.Enqueue(defaultText);
         }
 
-        public string WritePosition(string X, string Y)
+        public string WritePosition(double X, double Y)
         {
             string OutPutText = "";
 
-            UpdatePositionTextList("x: " + X + " y: " + Y);
+            UpdatePositionTextList("x: " + String.Format("{0:0.00}", X) + " y: " + String.Format("{0:0.00}", Y));
 
             foreach (string element in positionTextList)
             {

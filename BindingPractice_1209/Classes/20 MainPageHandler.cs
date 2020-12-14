@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BindingPractice_1209.Classes.View;
+using BindingPractice_1209.Classes;
 
 namespace DiagnosticApp
 {
@@ -19,38 +20,55 @@ namespace DiagnosticApp
         public SteeringWheelView SteeringWheel;
         public ParameterTextView ParameterText;
         public GearShiftView GearShift;
-        public DisplayRobotView DisplayRobot;
+        public MiniMapView MiniMap;
+        private TickSource Tick;
+
+        //environment for system tick
+        private DefaultEnvironment environment;
 
         public MainPageHandler()
         {
-            Task<RobotModel> T1 = Task.Run(()=>  new RobotModel());
-            Task<SteeringWheelView> T2 = Task.Run(() => new SteeringWheelView());
-            Task<ParameterTextView> T3 = Task.Run(() => new ParameterTextView());
+            /*Task<RobotModel> T1 = Task.Run(()=>  );
+            Task<SteeringWheelView> T2 = Task.Run(() => );
+            Task<ParameterTextView> T3 = Task.Run(() => );
             Task<GearShiftView> T4 = Task.Run(() => new GearShiftView());
-            Task<DisplayRobotView> T5 = Task.Run(() => new DisplayRobotView());
+            Task<MiniMapView> T5 = Task.Run(() => new MiniMapView());*/
 
-            RobotModel = T1.Result;
-            SteeringWheel = T2.Result;
-            ParameterText = T3.Result;
-            GearShift = T4.Result;
-            DisplayRobot = T5.Result;
+            RobotModel = new RobotModel();
+            SteeringWheel = new SteeringWheelView();
+            ParameterText = new ParameterTextView();
+            GearShift = new GearShiftView();
+            MiniMap = new MiniMapView();
+            environment = new DefaultEnvironment();
+
+            Tick = new TickSource(environment, Constants.SYSTEM_TICK_MS);
+            environment.onTick += Environment_onTick;
+            //Tick.Start();
+        }
+
+        //calls updater functions on system tick
+        private void Environment_onTick()
+        {
+            WritePosition();
         }
 
         //writing the current position of the robot
         public void WritePosition()
         {
-            ParameterText.WritePosition(
-                String.Format("{0:0.00}", RobotModel.Coord[0]),
-                String.Format("{0:0.00}", RobotModel.Coord[1])
-                );
+            ParameterText.WritePosition(RobotModel.Coord[0], RobotModel.Coord[1]);
         }
 
+        //*************ONLY FOR TEST***************
+        //(write given coords
         public void WritePosition(double[] coord)
         {
-            ParameterText.WritePosition(
-                String.Format("{0:0.00}", coord[0]),
-                String.Format("{0:0.00}", coord[1])
-                );
+            ParameterText.WritePosition(RobotModel.Coord[0], RobotModel.Coord[1]);
+        }
+
+        //updating the minimap
+        private void UpdateMiniMap()
+        {
+            MiniMap.Update(RobotModel.Coord[0], RobotModel.Coord[1], RobotModel.Orientation);
         }
 
         //writing the current speed of the robot
@@ -75,7 +93,7 @@ namespace DiagnosticApp
         public void Steer()
         {
             RobotModel.changeSteeringWheelAngle(SteeringWheel.SteeringValue);
-            DisplayRobot.TurnToDegree((int)SteeringWheel.SteeringValue);
+            MiniMap.TurnToDegree((int)SteeringWheel.SteeringValue);
         }
 
 
@@ -97,7 +115,7 @@ namespace DiagnosticApp
             SteeringWheel.Reset();
             RobotModel.Reset();
             GearShift.Reset();
-            DisplayRobot.Reset();
+            MiniMap.Reset();
         }
 
     }

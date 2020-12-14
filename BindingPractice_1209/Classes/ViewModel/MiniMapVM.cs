@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BindingPractice_1209.Classes.ViewModel
 {
-    public static class DisplayRobotVM
+    public static class MiniMapVM
     {
         private const int CENTERX_OFFSET = 120;
         private const int CENTERY_OFFSET = 115;
@@ -36,7 +36,7 @@ namespace BindingPractice_1209.Classes.ViewModel
             return (int)degree % 360;
         }
 
-        /*public static void MoveForward(int orientation, out int newx, out int newy)
+        public static void MoveForward(int orientation, out int newx, out int newy)
         {
             Task<Double> Tx = Task.Run(() => 5*Math.Sin(orientation * Math.PI / 180));
             Task<Double> Ty = Task.Run(() => 5*Math.Cos(orientation * Math.PI / 180));
@@ -44,7 +44,7 @@ namespace BindingPractice_1209.Classes.ViewModel
             newx = (int)Tx.Result;
             newy = (int)Ty.Result;
             
-        }*/
+        }
 
     }
 }

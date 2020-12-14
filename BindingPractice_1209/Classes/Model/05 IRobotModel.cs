@@ -8,6 +8,6 @@ namespace DiagnosticApp
 {
     interface IRobotModel
     {
-        
+        //TODO
     }
 }

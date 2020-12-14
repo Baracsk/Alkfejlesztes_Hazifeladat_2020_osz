@@ -186,15 +186,15 @@
                 <Rectangle Name="Car" 
                            Width="10" 
                            Height="20" 
-                           Canvas.Left="{x:Bind PageHandler.DisplayRobot.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                           Canvas.Top="{x:Bind PageHandler.DisplayRobot.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                           Canvas.Left="{x:Bind PageHandler.MiniMap.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                           Canvas.Top="{x:Bind PageHandler.MiniMap.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                            RadiusX="1.5" 
                            RadiusY="1.5"
                            Fill="#FF521681" 
                            RenderTransformOrigin="0.5,0.5">
 
                     <Rectangle.RenderTransform>
-                        <CompositeTransform Rotation="{x:Bind PageHandler.DisplayRobot.Orientation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <CompositeTransform Rotation="{x:Bind PageHandler.MiniMap.Orientation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Rectangle.RenderTransform>
                 </Rectangle>
 
