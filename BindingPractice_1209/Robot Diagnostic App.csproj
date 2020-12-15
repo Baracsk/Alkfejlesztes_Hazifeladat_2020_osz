@@ -120,18 +120,20 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\00 Constants.cs" />
-    <Compile Include="Classes\20 MainPageHandler.cs" />
-    <Compile Include="Classes\DefaultEnvironment.cs" />
-    <Compile Include="Classes\IEnvironment.cs" />
+    <Compile Include="Classes\ViewModel\20 MainPageVM.cs" />
+    <Compile Include="Classes\Model\DefaultEnvironment.cs" />
+    <Compile Include="Classes\Model\IEnvironment.cs" />
     <Compile Include="Classes\Model\06 RobotModel.cs" />
     <Compile Include="Classes\Model\RobotCommumicationInterfaceModel.cs" />
-    <Compile Include="Classes\Tick.cs" />
+    <Compile Include="Classes\Model\Tick.cs" />
+    <Compile Include="Classes\ViewModel\DrivingInterfaceVM.cs" />
+    <Compile Include="Classes\ViewModel\MainViewModelBase.cs" />
     <Compile Include="Classes\ViewModel\MiniMapVM.cs" />
     <Compile Include="Classes\ViewModel\ParameterTextVM.cs" />
     <Compile Include="Classes\View\MiniMapView.cs" />
     <Compile Include="Classes\View\GearShiftView.cs" />
     <Compile Include="Classes\View\ParameterTextView.cs" />
-    <Compile Include="Classes\View\SteeringWheelView.cs" />
+    <Compile Include="Classes\View\DrivingInterfaceView.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

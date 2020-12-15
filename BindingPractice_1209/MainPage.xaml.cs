@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using BindingPractice_1209.Classes;
+using RobotInterfaceApp.Classes;
 using System.Threading.Tasks;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -50,8 +50,6 @@ namespace DiagnosticApp
             {
                 Angle = RotationAngle
             };
-
-            PageHandler.Steer();
         }
 
         //
@@ -64,7 +62,7 @@ namespace DiagnosticApp
         {
             //throw new NotImplementedException();
             //**********TEST**************************
-            PageHandler.MiniMap.MoveForward(PageHandler.RobotModel.Reverse);
+            PageHandler.WritePosition(new double[2] {0.1, 0.1 });
         }
 
         private void Brake_Button_Click(object sender, RoutedEventArgs e)
@@ -84,7 +82,7 @@ namespace DiagnosticApp
 
         private void Gearshift_Toggled(object sender, RoutedEventArgs e)
         {
-            PageHandler.ChangeShift(GearShift.IsOn);
+
         }
     }
 }

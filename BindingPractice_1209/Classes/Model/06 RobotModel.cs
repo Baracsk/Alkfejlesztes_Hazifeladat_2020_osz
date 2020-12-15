@@ -1,4 +1,5 @@
-﻿using RobotDiagnosticApp.Classes.Model;
+﻿using RobotInterfaceApp.Classes.ViewModel;
+using RobotDiagnosticApp.Classes.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,24 +10,67 @@ namespace DiagnosticApp.Classes
 {
     public class RobotModel : IRobotModel
     {
-        //indeces for the position array
-        private const int indexX = 0;
-        private const int indexY = 0;
+        //variables for the parameter text on the screen
+        public double Speed 
+        { 
+            get => textVM.Speed; 
+            set { textVM.Speed = value; } 
+        } 
+        public double[] Coord 
+        {
+            get => textVM.Coord; 
+            set 
+            { 
+                textVM.Coord = value;
+                mapVM.Coord = value;
+            } 
+        }
 
-        public double SpeedPercentage { get; set; } 
-        public double[] Coord { get; set; }
-
-        public double SteeringWheelAngle { get; set; }
-        public int Orientation { get; set; }
-        public bool Reverse { get; set; }
+        //variables for the steeringwheel and the gearshift
+        public double SteeringWheelAngle
+        {
+            get { return interfaceVM.SteeringWheelAngle; }
+            set 
+            {
+                interfaceVM.SteeringWheelAngle = value;
+            }
+        }
+        public bool GearShiftInReverse 
+        {
+            get { return interfaceVM.GearShiftInReverse; }
+            set
+            {
+                interfaceVM.GearShiftInReverse = value;
+            }
+        }
+        
+        //variables for the minimap
+        public double Orientation 
+        {
+            get { return Orientation; }
+            set
+            {
+                mapVM.Orientation = (int)value;
+            }
+        }
 
         private RobotCommumicationInterfaceModel communicationInterface;
 
+        public ParameterTextVM textVM;
+        public DrivingInterfaceVM interfaceVM;
+        public MiniMapVM mapVM;
+
         public RobotModel(double speedPercentage = 0, double X = 0, double Y = 0, int steeringWheelAngle = 0, int orientation = 0)
         {
+            textVM = new ParameterTextVM();
+            interfaceVM = new DrivingInterfaceVM();
+            mapVM = new MiniMapVM();
+            communicationInterface = new RobotCommumicationInterfaceModel();
+
+            //checking if speed value is between the limits
             if (speedPercentage >= 0 && speedPercentage <= 100)
             {
-                this.SpeedPercentage = speedPercentage;
+                textVM.Speed = speedPercentage;
             }
             else
             {
@@ -34,42 +78,38 @@ namespace DiagnosticApp.Classes
             }
 
             Coord = new double[] { X, Y };
-            this.SteeringWheelAngle = steeringWheelAngle;
-
-            this.Reverse = false;
             this.Orientation = orientation;
-
-            communicationInterface = new RobotCommumicationInterfaceModel();
         }
 
         //resetting all the values
         public void Reset()
         {
-            SpeedPercentage = 0;
-            Coord[indexX] = 0;
-            Coord[indexY] = 0;
+            Speed = 0;
+            Coord[0] = 0;
+            Coord[1] = 0;
             SteeringWheelAngle = 0;
-            Reverse = false;
+            Orientation = 0;
+            GearShiftInReverse = false;
         }
 
         //increasing the speed
         public void Accelerate()
         {
-            if ((SpeedPercentage += Constants.SPEED_CHANGE_SCALE) < 100) { }
-            else SpeedPercentage = 100;
+            if ((Speed += Constants.SPEED_CHANGE_SCALE) < 100) { }
+            else Speed = 100;
         }
 
         //decreasing the speed
         public void Brake()
         {
-            if ((SpeedPercentage -= Constants.SPEED_CHANGE_SCALE) > 0) { }
-            else SpeedPercentage = 0;
+            if ((Speed -= Constants.SPEED_CHANGE_SCALE) > 0) { }
+            else Speed = 0;
         }
 
         //Immediate stopping of the robot
         public void E_Stop()
         {
-            SpeedPercentage = 0;
+            Speed = 0;
         }
 
         //Turning the steering wheel
@@ -81,7 +121,7 @@ namespace DiagnosticApp.Classes
         //Changing the gearshift to reverse mode
         public void IsReverse(bool reverse)
         {
-            this.Reverse = reverse;
+            this.GearShiftInReverse = reverse;
         }
     }
 }

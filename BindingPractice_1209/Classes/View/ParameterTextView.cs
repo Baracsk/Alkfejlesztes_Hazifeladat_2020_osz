@@ -1,10 +1,13 @@
-﻿using BindingPractice_1209.Classes.ViewModel;
+﻿using RobotInterfaceApp.Classes.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Threading;
+using RobotInterfaceApp.Classes;
 
 namespace RobotDiagnosticApp.Classes.View
 {
@@ -23,7 +26,7 @@ namespace RobotDiagnosticApp.Classes.View
         public string PositionText
         {
             get { return _positionText; }
-            set
+            set 
             {
                 _positionText = value;
                 OnPropertyChanged("PositionText");
@@ -39,18 +42,17 @@ namespace RobotDiagnosticApp.Classes.View
             }
         }
 
-        private ParameterTextVM TextVM;
-
-        public ParameterTextView(string postext = DEFAULT_POSITION_TEXT, string speedtext = DEFAULT_SPEED_TEXT)
+        public ParameterTextView( string postext = DEFAULT_POSITION_TEXT, string speedtext = DEFAULT_SPEED_TEXT)
         {
+
             PositionText = postext;
             SpeedText = speedtext;
 
             positionTextList = new Queue<string>();
             positionTextList.Enqueue(postext);
 
-            TextVM = new ParameterTextVM(PositionText);
         }
+
 
         //Propertychanged functions for updating the change of the values
         public event PropertyChangedEventHandler PropertyChanged;
@@ -60,31 +62,5 @@ namespace RobotDiagnosticApp.Classes.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void WritePosition(double X, double Y)
-        { 
-            Task<string> WriteposTask = Task.Run(() =>  TextVM.WritePosition(X, Y));
-
-            PositionText = WriteposTask.Result; 
-            OnPropertyChanged("PositionText");
-        }
-
-        //writing the current speed of the robot
-        public void WriteSpeed(string speed)
-        {
-            SpeedText = speed + " m/s";
-            OnPropertyChanged("SpeedText");
-        }
-
-        public void Reset()
-        {
-            //resetting the text values to default
-            PositionText = "x: 0 y: 0";
-            OnPropertyChanged("PositionText");
-
-            SpeedText = "0 m/s";
-            OnPropertyChanged("SpeedText");
-            positionTextList.Clear();
-
-        }
     }
 }

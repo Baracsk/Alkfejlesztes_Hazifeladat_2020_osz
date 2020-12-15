@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BindingPractice_1209.Classes
+namespace RobotInterfaceApp.Classes
 
-{
-    class TickSource
+{ }
+    /*class TickSource
     {
         private Timer timer;
         private readonly IEnvironment env;
@@ -31,3 +31,4 @@ namespace BindingPractice_1209.Classes
         }
     }
 }
+    */

@@ -39,9 +39,9 @@
         <TextBlock x:Name="Speed" Grid.Row="3" Grid.Column="0" Text="Speed:" FontSize="13" VerticalAlignment="Center" FontWeight="Bold" />
         <TextBlock x:Name="Position" Grid.Row="5" Grid.Column="0" Text="Position" FontSize="13" VerticalAlignment="Center"  FontWeight="Bold" />
 
-        <TextBlock Name ="SpeedValueOut" Text ="{x:Bind PageHandler.ParameterText.SpeedText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"  Grid.Row="4"  MinWidth="70" Margin="5, 0, 0, 0" TextAlignment="Left" FontSize="13" TextWrapping="Wrap"  VerticalAlignment="Center" FontStyle="Italic" />
+        <TextBlock Name ="SpeedValueOut" Text ="{x:Bind PageHandler.RobotModel.textVM.View.SpeedText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"  Grid.Row="4"  MinWidth="70" Margin="5, 0, 0, 0" TextAlignment="Left" FontSize="13" TextWrapping="Wrap"  VerticalAlignment="Center" FontStyle="Italic" />
 
-        <TextBox IsReadOnly="True" Name ="PositionOut" Text ="{x:Bind PageHandler.ParameterText.PositionText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left"  Grid.Row="6"  Grid.RowSpan="3" MinWidth="70" MinHeight="100" Margin="5, 0, 0, 0" TextAlignment="Left" FontSize="10" TextWrapping="Wrap" VerticalAlignment="Center"  FontStyle="Italic"/>
+        <TextBox IsReadOnly="True" Name ="PositionOut" Text ="{x:Bind PageHandler.RobotModel.textVM.View.PositionText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left"  Grid.Row="6"  Grid.RowSpan="3" MinWidth="70" MinHeight="100" Margin="5, 0, 0, 0" TextAlignment="Left" FontSize="10" TextWrapping="Wrap" VerticalAlignment="Center"  FontStyle="Italic"/>
 
         <TextBlock 
             x:Name="Map"
@@ -92,7 +92,7 @@
             Minimum="-180"
             MinWidth="50"
             MaxWidth="100"
-            Value= "{x:Bind PageHandler.SteeringWheel.SteeringValue, Mode=TwoWay}"
+            Value= "{x:Bind PageHandler.RobotModel.interfaceVM.View.SteeringWheelAngle, Mode=TwoWay}"
             VerticalAlignment="Bottom" 
             ValueChanged="RotationSlider_ValueChanged" 
              />
@@ -172,7 +172,7 @@
             VerticalAlignment="Center"
             OffContent="Fw"
             OnContent="Rev"
-            IsOn="{x:Bind PageHandler.GearShift.GearShiftValue, Mode=TwoWay}"
+            IsOn="{x:Bind PageHandler.RobotModel.interfaceVM.View.GearShiftInReverse, Mode=TwoWay}"
             Toggled="Gearshift_Toggled"
             />
 
@@ -186,15 +186,15 @@
                 <Rectangle Name="Car" 
                            Width="10" 
                            Height="20" 
-                           Canvas.Left="{x:Bind PageHandler.MiniMap.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                           Canvas.Top="{x:Bind PageHandler.MiniMap.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                           Canvas.Left="{x:Bind PageHandler.RobotModel.mapVM.View.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                           Canvas.Top="{x:Bind PageHandler.RobotModel.mapVM.View.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                            RadiusX="1.5" 
                            RadiusY="1.5"
                            Fill="#FF521681" 
                            RenderTransformOrigin="0.5,0.5">
 
                     <Rectangle.RenderTransform>
-                        <CompositeTransform Rotation="{x:Bind PageHandler.MiniMap.Orientation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <CompositeTransform Rotation="{x:Bind PageHandler.RobotModel.mapVM.View.Orientation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Rectangle.RenderTransform>
                 </Rectangle>
 

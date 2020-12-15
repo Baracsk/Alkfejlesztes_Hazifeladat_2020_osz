@@ -1,15 +1,43 @@
 ﻿using System;
+using RobotInterfaceApp.Classes.View;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BindingPractice_1209.Classes.ViewModel
+namespace RobotInterfaceApp.Classes.ViewModel
 {
-    public static class MiniMapVM
+    public class MiniMapVM
     {
         private const int CENTERX_OFFSET = 120;
         private const int CENTERY_OFFSET = 115;
+
+        public double[] Coord
+        {
+            get { return Coord; }
+            set 
+            {
+                Coord = value;
+                View.X = CENTERX_OFFSET + (int)Coord[0];
+                View.Y = CENTERY_OFFSET - (int)Coord[1];
+            }
+        }
+        public int Orientation
+        {
+            get { return Orientation; }
+            set 
+            {
+                View.Orientation = ScaleDegreeTo360(value);
+            }
+        }
+
+        public MiniMapView View;
+
+        public MiniMapVM(double X = 0, double Y = 0, int Orientation = 0)
+        {
+            View = new MiniMapView();
+        }
+
 
         public static int GetDisplayedX(int x)
         {
@@ -36,13 +64,13 @@ namespace BindingPractice_1209.Classes.ViewModel
             return (int)degree % 360;
         }
 
-        public static void MoveForward(int orientation, out int newx, out int newy)
+        public void MoveForward()
         {
-            Task<Double> Tx = Task.Run(() => 5*Math.Sin(orientation * Math.PI / 180));
-            Task<Double> Ty = Task.Run(() => 5*Math.Cos(orientation * Math.PI / 180));
+            Task<Double> Tx = Task.Run(() => 5*Math.Sin(Orientation * Math.PI / 180));
+            Task<Double> Ty = Task.Run(() => 5*Math.Cos(Orientation * Math.PI / 180));
 
-            newx = (int)Tx.Result;
-            newy = (int)Ty.Result;
+            Coord[0] = (int)Tx.Result;
+            Coord[1] = (int)Ty.Result;
             
         }
 
