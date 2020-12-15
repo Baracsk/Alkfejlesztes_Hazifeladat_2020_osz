@@ -120,25 +120,18 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\00 Constants.cs" />
+    <Compile Include="Classes\Model\DrivingInterfaceModel.cs" />
+    <Compile Include="Classes\Model\MiniMapModel.cs" />
+    <Compile Include="Classes\Model\ParameterTextModel.cs" />
+    <Compile Include="Classes\ViewModel\ObservableObject.cs" />
     <Compile Include="Classes\ViewModel\20 MainPageVM.cs" />
-    <Compile Include="Classes\Model\DefaultEnvironment.cs" />
-    <Compile Include="Classes\Model\IEnvironment.cs" />
-    <Compile Include="Classes\Model\06 RobotModel.cs" />
-    <Compile Include="Classes\Model\RobotCommumicationInterfaceModel.cs" />
-    <Compile Include="Classes\Model\Tick.cs" />
     <Compile Include="Classes\ViewModel\DrivingInterfaceVM.cs" />
-    <Compile Include="Classes\ViewModel\MainViewModelBase.cs" />
     <Compile Include="Classes\ViewModel\MiniMapVM.cs" />
     <Compile Include="Classes\ViewModel\ParameterTextVM.cs" />
-    <Compile Include="Classes\View\MiniMapView.cs" />
-    <Compile Include="Classes\View\GearShiftView.cs" />
-    <Compile Include="Classes\View\ParameterTextView.cs" />
-    <Compile Include="Classes\View\DrivingInterfaceView.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Classes\Model\05 IRobotModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -172,7 +165,9 @@
       <Version>6.2.10</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Classes\View\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

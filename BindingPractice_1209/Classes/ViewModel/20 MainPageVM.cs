@@ -1,4 +1,4 @@
-﻿using RobotDiagnosticApp.Classes.View;
+﻿
 using DiagnosticApp.Classes;
 using System;
 using System.Threading;
@@ -7,8 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RobotInterfaceApp.Classes.View;
-using RobotInterfaceApp.Classes;
+using RobotDiagnosticApp.Classes;
 
 namespace DiagnosticApp
 {

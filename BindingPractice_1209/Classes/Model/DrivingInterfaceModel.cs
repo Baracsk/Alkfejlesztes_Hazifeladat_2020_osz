@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DiagnosticApp
+namespace RobotDiagnosticApp.Classes.Model
 {
-    interface IRobotModel
+    class DrivingInterfaceModel :ObservableObject
     {
-        //TODO
+
     }
 }

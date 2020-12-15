@@ -1,38 +1,44 @@
-﻿using RobotDiagnosticApp.Classes.View;
+﻿using RobotDiagnosticApp.Classes;
+using RobotDiagnosticApp.Classes.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RobotInterfaceApp.Classes.ViewModel
+namespace RobotDiagnosticApp.Classes.ViewModel
 {
-    public class DrivingInterfaceVM
+    public class DrivingInterfaceVM : ObservableObject
     {
+        DrivingInterfaceModel Model;
 
         public double SteeringWheelAngle
         {
-            get { return View.SteeringWheelAngle; }
+            get { return SteeringWheelAngle; }
             set
             {
-                View.SteeringWheelAngle = value;
+                SteeringWheelAngle = value;
+                RaisePropertyChangedEvent("SteeringWheelAngle");
             }
         }
 
         public bool GearShiftInReverse
         {
-            get { return View.GearShiftInReverse; }
+            get { return GearShiftInReverse; }
             set
             {
-                View.GearShiftInReverse = value;
+                GearShiftInReverse = value;
+                RaisePropertyChangedEvent("GearShiftInReverse");
             }
         }
 
-        public DrivingInterfaceView View;
 
         public DrivingInterfaceVM(double SteeringWheelAngle = 0, bool GearShiftInReverse = false)
         {
-            View = new DrivingInterfaceView((int)SteeringWheelAngle, GearShiftInReverse);
+            Model = new DrivingInterfaceModel();
+
+            this.SteeringWheelAngle = SteeringWheelAngle;
+            this.GearShiftInReverse = GearShiftInReverse;
         }
 
     }

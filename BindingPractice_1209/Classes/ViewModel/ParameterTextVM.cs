@@ -1,16 +1,44 @@
-﻿using RobotDiagnosticApp.Classes.View;
+﻿using RobotDiagnosticApp.Classes;
+using RobotDiagnosticApp.Classes.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RobotInterfaceApp.Classes.ViewModel
+namespace RobotDiagnosticApp.Classes.ViewModel
 {
-    public class ParameterTextVM
+    public class ParameterTextVM :ObservableObject
     {
+        private const string DEFAULT_POSITION_TEXT = "x: 0 y: 0";
+        private const string DEFAULT_SPEED_TEXT = "0 m/s";
+
         private Queue<string> positionTextList;
-        public ParameterTextView View;
+
+        ParameterTextModel Model;
+
+        private string _positionText;
+        private string _speedText; 
+
+        public string PositionText
+        {
+            get { return _positionText; }
+            set
+            {
+                _positionText = value;
+                RaisePropertyChangedEvent("PositionText");
+            }
+        }
+
+        public string SpeedText
+        {
+            get { return _speedText; }
+            set
+            {
+                _speedText = value;
+                RaisePropertyChangedEvent("SpeedText");
+            }
+        }
 
         public double[] Coord 
         { 
@@ -28,13 +56,12 @@ namespace RobotInterfaceApp.Classes.ViewModel
             set
             {
                 Speed = value;
-                WriteSpeedInView();
             }
         }
 
         public ParameterTextVM()
         {
-            View = new ParameterTextView();
+            Model = new ParameterTextModel();
 
             positionTextList = new Queue<string>();
 
@@ -51,7 +78,7 @@ namespace RobotInterfaceApp.Classes.ViewModel
                 OutPutText += element + '\n';
             }
 
-            View.PositionText = OutPutText;
+            PositionText = OutPutText;
         }
 
         private void UpdatePositionTextList(string newText)
@@ -63,13 +90,5 @@ namespace RobotInterfaceApp.Classes.ViewModel
 
             positionTextList.Enqueue(newText);
         }
-
-        private void WriteSpeedInView()
-        {
-            View.SpeedText = String.Format("{0:0.00}", Speed) + " km/h";
-        }
-
-
-
     }
 }

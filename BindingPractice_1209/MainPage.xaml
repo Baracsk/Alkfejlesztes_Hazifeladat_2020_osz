@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Margin="3,3,0,0">
@@ -183,7 +184,8 @@
                 <Line Stroke="Red" X1="0" X2="250" Y1="125" Y2="125"></Line>
                 <Line Stroke="Red" X1="125" X2="125" Y1="0" Y2="250"></Line>
 
-                <Rectangle Name="Car" 
+                <Rectangle 
+                    Name="Car" 
                            Width="10" 
                            Height="20" 
                            Canvas.Left="{x:Bind PageHandler.RobotModel.mapVM.View.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
