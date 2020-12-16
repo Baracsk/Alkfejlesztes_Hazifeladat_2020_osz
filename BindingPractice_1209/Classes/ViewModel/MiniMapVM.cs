@@ -105,10 +105,18 @@ namespace RobotDiagnosticApp.Classes.ViewModel
 
         public async Task UpdatePositionParameters(double X, double Y, int orientation)
         {
+            //checking if vehicle moved
+            bool isPositionChanged = (this.X != X || this.Y != Y);
+
             this.X = X;
             this.Y = Y;
-            await WriteNewPosition();
             Orientation = orientation;
+
+            if (isPositionChanged)
+            { 
+                await WriteNewPosition(); 
+            }
+            
         }
     }
 }

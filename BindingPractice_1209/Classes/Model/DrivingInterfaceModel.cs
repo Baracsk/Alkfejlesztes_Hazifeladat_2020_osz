@@ -17,7 +17,10 @@ namespace RobotDiagnosticApp.Classes.Model
             get => _gearShiftInReverse;
             set
             {
-                _gearShiftInReverse = value;
+                if (Speed == 0 && value != _gearShiftInReverse)
+                {
+                    _gearShiftInReverse = value;
+                }
                 Notify();
             }
         }

@@ -131,8 +131,6 @@
                 Margin="5,5,0,5" 
                 Command="{x:Bind Interface.StartButtonClicked, Mode=OneWay}"
                 />
-        
-        
 
         <Button 
             Name ="Accelerate"

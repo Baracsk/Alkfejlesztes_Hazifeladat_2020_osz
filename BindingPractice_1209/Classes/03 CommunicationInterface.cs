@@ -118,6 +118,8 @@ namespace RobotDiagnosticApp.Classes
             { 
                 setNewParameters(recvX, recvY, recvOrientation); 
             });
+            sentIsReset = false;
+            sentIsSelfTest = false;
             
         }
 
@@ -147,12 +149,13 @@ namespace RobotDiagnosticApp.Classes
             MiniMap.UpdatePositionParameters(recvX, Y, orientation);
         }
 
+        //code for testing 
         private void Move()
         {
             int sign = (sentisReverse) ? -1 : 1;
-            recvOrientation += sentSteeringWheelAngle*sentSpeed / 100;
-            recvX += sign*(sentSpeed * Math.Sin(recvOrientation * Math.PI / 180))*0.1;
-            recvY += sign*(sentSpeed * Math.Cos(recvOrientation * Math.PI / 180))*0.1;
+            recvOrientation += sentSteeringWheelAngle*sentSpeed / 500;
+            recvX += sign*(sentSpeed * Math.Sin(recvOrientation * Math.PI / 180))*0.02;
+            recvY += sign*(sentSpeed * Math.Cos(recvOrientation * Math.PI / 180))*0.02;
         }
     }
 }
