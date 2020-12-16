@@ -11,20 +11,12 @@ namespace RobotDiagnosticApp.Classes.Model
     {
         public bool GearShiftInReverse
         {
-            get { return GearShiftInReverse; }
-            set
-            {
-                GearShiftInReverse = value;
-                RaisePropertyChangedEvent("GearShiftInReverse");
-            }
+            get; set;
         }
+
         public int Speed 
-        { 
-            get { return Speed; } 
-            set
-            {
-                Speed = value;
-            }
+        {
+            get; set;
         }
 
         public DrivingInterfaceModel(bool GearShiftInReverse = false, int Speed = 0)

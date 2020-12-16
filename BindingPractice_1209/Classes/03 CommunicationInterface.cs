@@ -24,6 +24,7 @@ namespace RobotDiagnosticApp.Classes
             SteeringWheel = new SteeringWheelVM();
             
         }
+
         //*************FOR COMMUNICATION*******************
 
         //TO SEND

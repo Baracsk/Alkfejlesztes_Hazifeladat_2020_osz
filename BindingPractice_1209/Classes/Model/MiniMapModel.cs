@@ -11,27 +11,21 @@ namespace RobotDiagnosticApp.Classes.Model
     {
         public double X
         {
-            get { return X; }
-            set
-            {
-                X = value;
-            }
+            get; set;
 
         }
         public double Y
         {
-            get { return Y; }
-            set
-            {
-                Y = value;
-            }
+            get; set;
         }
+
+        private int orientation_;
         public int Orientation
         {
-            get { return Orientation; }
+            get { return orientation_; }
             set
             {
-                Orientation = ScaleDegreeTo360(value);
+                orientation_ = ScaleDegreeTo360(value);
             }
         }
 

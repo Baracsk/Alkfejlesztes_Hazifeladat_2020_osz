@@ -15,6 +15,7 @@ namespace RobotDiagnosticApp.Classes.ViewModel
         public int Angle
         {
             get => Model.SteeringWheelAngle;
+            set => Model.SteeringWheelAngle = value;
         }
 
         public ICommand SteerLeftClicked
@@ -36,14 +37,12 @@ namespace RobotDiagnosticApp.Classes.ViewModel
         {
             Model = new SteeringWheelModel(SteeringWheelAngle);
             Model.PropertyChanged += Model_PropertyChanged;
+
         }
 
         private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Angle")
-            {
-                Notify(e.PropertyName);
-            }
+            Notify(e.PropertyName);
         }
 
         private void Notify(string PropertyName)

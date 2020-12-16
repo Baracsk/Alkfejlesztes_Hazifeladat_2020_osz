@@ -16,6 +16,19 @@ namespace RobotDiagnosticApp.Classes.ViewModel
 
         MiniMapModel Model;
 
+        //Array for collecting the previous coordinates
+        private Queue<string> positionTextList;
+
+        public double X 
+        {
+            get => Model.X;
+            set => Model.X = value;
+        }
+        public double Y
+        {
+            get => Model.Y;
+            set => Model.Y = value;
+        }
         public int mapX
         {
             get => (int)Model.X + CENTERX_OFFSET;
@@ -27,18 +40,20 @@ namespace RobotDiagnosticApp.Classes.ViewModel
         public int Orientation
         {
             get => Model.Orientation;
+            set => Model.Orientation = value;
         }
         public string PositionText
         {
-            get { return PositionText; }
-            set { PositionText = value; }
+            get; set;
         }
 
-        public MiniMapVM(int X = 0, int Y = 0, int Orientation = 0)
+        public MiniMapVM(double X = 10.0, double Y = 0, int Orientation = 0)
         {
-            Model = new MiniMapModel();
+            Model = new MiniMapModel(X, Y, Orientation);
 
             Model.PropertyChanged += Model_PropertyChanged;
+
+            positionTextList = new Queue<string>();
 
         }
 
@@ -46,7 +61,7 @@ namespace RobotDiagnosticApp.Classes.ViewModel
         {
             if (e.PropertyName == "X" || e.PropertyName == "Y" )
             {
-                WriteNewSpeed();
+                WriteNewPosition();
                 Notify(e.PropertyName);
             }
             if (e.PropertyName == "Orientation")
@@ -54,22 +69,41 @@ namespace RobotDiagnosticApp.Classes.ViewModel
                 Notify(e.PropertyName);
             }
         }
-        private void WriteNewSpeed()
+        private void WriteNewPosition()
         {
-            PositionText = String.Format("x: {0:0.00} y: {1:0.00}", Model.X, Model.Y);
+            string NewTextElement = String.Format("x: {0:0.00} y: {1:0.00}", X, Y);
+
+            UpdatePositionTextList(NewTextElement);
+
+            string Merged = "";
+            foreach (string element in positionTextList)
+            {
+                Merged += element + '\n';
+            }
+            PositionText = Merged;
+        }
+
+        private void UpdatePositionTextList(string newText)
+        {
+            if (positionTextList.Count() >= 10)
+            {
+                positionTextList.Dequeue();
+            }
+
+            positionTextList.Enqueue(newText);
+        }
+
+        public void UpdatePositionParameters(double X, double Y, int orientation)
+        {
+            this.X = X;
+            this.Y = Y;
+            Orientation = orientation;
         }
 
         //notify 
         private void Notify(string PropertyName)
         {
             RaisePropertyChangedEvent(PropertyName);
-        }
-
-        public void UpdatePositionParameters(double X, double Y, int orientation)
-        {
-            Model.X = X;
-            Model.Y = Y;
-            Model.Orientation = orientation;
         }
     }
 }

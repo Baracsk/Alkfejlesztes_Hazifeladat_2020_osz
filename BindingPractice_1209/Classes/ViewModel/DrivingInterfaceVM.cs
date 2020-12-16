@@ -1,4 +1,4 @@
-﻿using BindingPractice_1209;
+﻿
 using RobotDiagnosticApp.Classes;
 using RobotDiagnosticApp.Classes.Model;
 using System;
@@ -24,11 +24,7 @@ namespace RobotDiagnosticApp.Classes.ViewModel
         }
         public string SpeedText
         {
-            get { return SpeedText; }
-            set
-            {
-                SpeedText = value;
-            }
+            get; set;
         }
 
 

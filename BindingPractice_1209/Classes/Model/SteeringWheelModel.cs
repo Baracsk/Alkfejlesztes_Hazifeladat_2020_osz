@@ -11,8 +11,7 @@ namespace RobotDiagnosticApp.Classes.Model
     {
         public int SteeringWheelAngle
         {
-            get { return SteeringWheelAngle; }
-            set { SteeringWheelAngle = value; }
+            get; set;
         }
 
         public SteeringWheelModel(int SteeringWheelAngle = 0)
