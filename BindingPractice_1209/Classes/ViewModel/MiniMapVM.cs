@@ -19,6 +19,8 @@ namespace RobotDiagnosticApp.Classes.ViewModel
         //Array for collecting the previous coordinates
         private Queue<string> positionTextList;
 
+        private string _positionText;
+
         public double X 
         {
             get => Model.X;
@@ -42,12 +44,18 @@ namespace RobotDiagnosticApp.Classes.ViewModel
             get => Model.Orientation;
             set => Model.Orientation = value;
         }
+
         public string PositionText
         {
-            get; set;
+            get => _positionText;
+            set
+            {
+                _positionText = value;
+                Notify();
+            }
         }
 
-        public MiniMapVM(double X = 10.0, double Y = 0, int Orientation = 0)
+        public MiniMapVM(double X = 0, double Y = 0, int Orientation = 0)
         {
             Model = new MiniMapModel(X, Y, Orientation);
 
@@ -59,15 +67,8 @@ namespace RobotDiagnosticApp.Classes.ViewModel
 
         private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "X" || e.PropertyName == "Y" )
-            {
-                WriteNewPosition();
-                Notify(e.PropertyName);
-            }
-            if (e.PropertyName == "Orientation")
-            {
-                Notify(e.PropertyName);
-            }
+            
+            Notify(e.PropertyName);
         }
         private void WriteNewPosition()
         {
@@ -97,13 +98,8 @@ namespace RobotDiagnosticApp.Classes.ViewModel
         {
             this.X = X;
             this.Y = Y;
+            WriteNewPosition();
             Orientation = orientation;
-        }
-
-        //notify 
-        private void Notify(string PropertyName)
-        {
-            RaisePropertyChangedEvent(PropertyName);
         }
     }
 }

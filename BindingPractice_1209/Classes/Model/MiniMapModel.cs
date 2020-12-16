@@ -9,23 +9,37 @@ namespace RobotDiagnosticApp.Classes.Model
 {
     class MiniMapModel : ObservableObject
     {
+        private double _x;
+        private double _y;
+        private int _orientation;
+
         public double X
         {
-            get; set;
+            get => _x;
+            set
+            {
+                _x = value;
+                Notify();
+            }
 
         }
         public double Y
         {
-            get; set;
-        }
-
-        private int orientation_;
-        public int Orientation
-        {
-            get { return orientation_; }
+            get => _y;
             set
             {
-                orientation_ = ScaleDegreeTo360(value);
+                _y = value;
+                Notify();
+            }
+        }
+
+        public int Orientation
+        {
+            get { return _orientation; }
+            set
+            {
+                _orientation = ScaleDegreeTo360(value);
+                Notify();
             }
         }
 

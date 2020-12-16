@@ -9,25 +9,31 @@ namespace RobotDiagnosticApp.Classes.Model
 {
     public class SteeringWheelModel : ObservableObject
     {
-        public int SteeringWheelAngle
+        private int _angle;
+        public int Angle
         {
-            get; set;
+            get => _angle;
+            set
+            {
+                _angle = value;
+                Notify();
+            }
         }
 
         public SteeringWheelModel(int SteeringWheelAngle = 0)
         {
-            this.SteeringWheelAngle = SteeringWheelAngle;
+            this.Angle = SteeringWheelAngle;
         }
 
-        public void SteerLeft()
-        {
-            if ((SteeringWheelAngle += Constants.STEER_CHANGE_SCALE) <= 90) { }
-            else SteeringWheelAngle = 90;
-        }
         public void SteerRight()
         {
-            if ((SteeringWheelAngle -= Constants.STEER_CHANGE_SCALE) >= -90) { }
-            else SteeringWheelAngle = -90;
+            if ((Angle += Constants.STEER_CHANGE_SCALE) <= 90) { }
+            else Angle = 90;
+        }
+        public void SteerLeft()
+        {
+            if ((Angle -= Constants.STEER_CHANGE_SCALE) >= -90) { }
+            else Angle = -90;
         }
     }
 }

@@ -16,6 +16,21 @@ namespace RobotDiagnosticApp.Classes
         public MiniMapVM MiniMap;
         public SteeringWheelVM SteeringWheel;
 
+        public ICommand TestButtonClicked
+        {
+            get
+            {
+                return new DelegateCommand(Test);
+            }
+        }
+        public ICommand ResetButtonClicked
+        {
+            get
+            {
+                return new DelegateCommand(Reset);
+            }
+        }
+
 
         public CommunicationInterface()
         {
@@ -24,6 +39,17 @@ namespace RobotDiagnosticApp.Classes
             SteeringWheel = new SteeringWheelVM();
             
         }
+
+        public void Reset()
+        {
+            DrivingInterface.Reset();
+            SteeringWheel.Reset();
+        }
+        public void Test()
+        {
+            setNewParameters(0.10, 0.0, 20);
+        }
+
 
         //*************FOR COMMUNICATION*******************
 

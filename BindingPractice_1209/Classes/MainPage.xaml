@@ -103,6 +103,7 @@
                 Grid.Column="0" 
                 VerticalAlignment="Bottom"
                 Margin="5,0,0,5" 
+                Command="{x:Bind Interface.TestButtonClicked, Mode=OneWay}"
                 />
 
             <Button 
@@ -114,6 +115,7 @@
                 Grid.Column="0" 
                 VerticalAlignment="Top"
                 Margin="5,15,0,5" 
+                Command="{x:Bind Interface.ResetButtonClicked, Mode=OneWay}"
                 />
 
         </Grid>
@@ -140,7 +142,7 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Right"
                 Margin="0,5,5,5" 
-                Command="{x:Bind Interface.SteeringWheel.SteerLeftClicked, Mode=OneWay}"
+                Command="{x:Bind Interface.SteeringWheel.SteerRightClicked, Mode=OneWay}"
                 />
 
         <Button 
