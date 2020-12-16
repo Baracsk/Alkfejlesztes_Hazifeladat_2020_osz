@@ -116,25 +116,26 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="App.xaml.cs">
+    <Compile Include="Classes\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\00 Constants.cs" />
+    <Compile Include="Classes\03 CommunicationInterface.cs" />
     <Compile Include="Classes\Model\DrivingInterfaceModel.cs" />
     <Compile Include="Classes\Model\MiniMapModel.cs" />
-    <Compile Include="Classes\Model\ParameterTextModel.cs" />
-    <Compile Include="Classes\ViewModel\ObservableObject.cs" />
-    <Compile Include="Classes\ViewModel\20 MainPageVM.cs" />
+    <Compile Include="Classes\Model\SteeringWheelModel.cs" />
+    <Compile Include="Classes\02 ObservableObject.cs" />
     <Compile Include="Classes\ViewModel\DrivingInterfaceVM.cs" />
     <Compile Include="Classes\ViewModel\MiniMapVM.cs" />
-    <Compile Include="Classes\ViewModel\ParameterTextVM.cs" />
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Classes\01 DelegateCommand.cs" />
+    <Compile Include="Classes\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\ViewModel\SteeringWheelVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AppxManifest Include="Package.appxmanifest">
+    <AppxManifest Include="Classes\Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
   </ItemGroup>
@@ -151,11 +152,15 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="Classes\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
+    <Page Include="Classes\View\RobotDiagnosticView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Classes\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -165,9 +170,7 @@
       <Version>6.2.10</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Classes\View\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

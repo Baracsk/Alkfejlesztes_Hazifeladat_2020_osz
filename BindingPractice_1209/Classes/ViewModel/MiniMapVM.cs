@@ -16,48 +16,60 @@ namespace RobotDiagnosticApp.Classes.ViewModel
 
         MiniMapModel Model;
 
-        public int X
+        public int mapX
         {
-            get { return X; }
-            set
-            {
-                X = value + CENTERX_OFFSET;
-                RaisePropertyChangedEvent("X");
-            }
+            get => (int)Model.X + CENTERX_OFFSET;
         }
-        public int Y
+        public int mapY
         {
-            get { return Y; }
-            set
-            {
-                Y = value - CENTERY_OFFSET;
-                RaisePropertyChangedEvent("Y");
-            }
+            get => CENTERY_OFFSET - (int)Model.Y;
         }
         public int Orientation
         {
-            get { return Orientation; }
-            set
-            {
-                Orientation = ScaleDegreeTo360(value);
-                RaisePropertyChangedEvent("Orientation");
-            }
+            get => Model.Orientation;
         }
-
+        public string PositionText
+        {
+            get { return PositionText; }
+            set { PositionText = value; }
+        }
 
         public MiniMapVM(int X = 0, int Y = 0, int Orientation = 0)
         {
             Model = new MiniMapModel();
 
-            this.Y = Y;
-            this.X = X;
-            this.Orientation = Orientation;
+            Model.PropertyChanged += Model_PropertyChanged;
+
         }
 
-        public static int ScaleDegreeTo360(int degree)
+        private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            return (int)degree % 360;
+            if (e.PropertyName == "X" || e.PropertyName == "Y" )
+            {
+                WriteNewSpeed();
+                Notify(e.PropertyName);
+            }
+            if (e.PropertyName == "Orientation")
+            {
+                Notify(e.PropertyName);
+            }
+        }
+        private void WriteNewSpeed()
+        {
+            PositionText = String.Format("x: {0:0.00} y: {1:0.00}", Model.X, Model.Y);
         }
 
+        //notify 
+        private void Notify(string PropertyName)
+        {
+            RaisePropertyChangedEvent(PropertyName);
+        }
+
+        public void UpdatePositionParameters(double X, double Y, int orientation)
+        {
+            Model.X = X;
+            Model.Y = Y;
+            Model.Orientation = orientation;
+        }
     }
 }
