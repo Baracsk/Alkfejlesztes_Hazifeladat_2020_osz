@@ -6,8 +6,10 @@ using System.Text;
 using System.Timers;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Core;
+using Windows.ApplicationModel.Core;
 
-namespace RobotDiagnosticApp.Classes
+namespace RobotDiagnosticApp.Classes 
 {
     //A communication Interface that has all the communication variables and is connected to the View
     public class CommunicationInterface
@@ -67,7 +69,7 @@ namespace RobotDiagnosticApp.Classes
             recvOrientation = 0;
 
             timer = new Timer(Constants.SYSTEM_TICK_MS);
-            //timer.Elapsed += Timer_Elapsed;
+            timer.Elapsed += Timer_Elapsed;
 
         }
 
@@ -76,13 +78,12 @@ namespace RobotDiagnosticApp.Classes
             timer.Start();
         }
 
-        /*
+        
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            Invoke(new Action(() => { UpdateCommunicatinData(); }));
-            recvX += 10;
+            Move();
             UpdateCommunicatinData();
-        }*/
+        }
 
         public void Reset()
         {
@@ -90,13 +91,19 @@ namespace RobotDiagnosticApp.Classes
             SteeringWheel.Reset();
             MiniMap.Reset();
             sentIsReset = true;
+
+            timer.Stop();
+
+            recvX = 0;
+            recvY = 0;
+            recvOrientation = 0;
         }
         public void Test()
         {
             setNewParameters(0.10, 0.0, 20);
             sentIsSelfTest = true;
         }
-        private void UpdateCommunicatinData()
+        private async Task UpdateCommunicatinData()
         {
             //writing the senable parameters of the class
             sentSpeed = getSpeed();
@@ -106,13 +113,13 @@ namespace RobotDiagnosticApp.Classes
             //TODO COMMUNICATE
 
             //write back the recieved parameters
+            var dispatcher = CoreApplication.MainView.CoreWindow.Dispatcher;
+            await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => 
+            { 
+                setNewParameters(recvX, recvY, recvOrientation); 
+            });
             
-            setNewParameters(recvX, recvY, recvOrientation);
         }
-            
-    
-
-
 
         //*************FOR COMMUNICATION*******************
 
@@ -137,7 +144,14 @@ namespace RobotDiagnosticApp.Classes
         //Sets the displayed parameters to the recieved values
         private void setNewParameters(double X, double Y, int orientation)
         {
-            MiniMap.UpdatePositionParameters(X, Y, orientation);
+            MiniMap.UpdatePositionParameters(recvX, Y, orientation);
+        }
+
+        private void Move()
+        {
+            recvOrientation += sentSteeringWheelAngle / 15;
+            recvX += (sentSpeed * Math.Sin(recvOrientation * Math.PI / 180))*0.1;
+            recvY += (sentSpeed * Math.Cos(recvOrientation * Math.PI / 180))*0.1;
         }
     }
 }

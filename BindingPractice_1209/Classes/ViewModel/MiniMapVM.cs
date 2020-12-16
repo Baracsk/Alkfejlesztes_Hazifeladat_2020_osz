@@ -11,8 +11,8 @@ namespace RobotDiagnosticApp.Classes.ViewModel
 {
     public class MiniMapVM : ObservableObject
     {
-        private const int CENTERX_OFFSET = 120;
-        private const int CENTERY_OFFSET = 115;
+        private const int CENTERX_OFFSET = 145;
+        private const int CENTERY_OFFSET = 140;
 
         MiniMapModel Model;
 
