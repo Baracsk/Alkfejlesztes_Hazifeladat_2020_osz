@@ -1,13 +1,13 @@
-﻿<Page
-    x:Class="DiagnosticApp.MainPage"
+﻿<UserControl
+    x:Class="RobotDiagnosticApp.Classes.View.RobotDiagnosticView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:DiagnosticApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <!--
     <Grid Margin="3,3,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -39,9 +39,9 @@
         <TextBlock x:Name="Speed" Grid.Row="3" Grid.Column="0" Text="Speed:" FontSize="13" VerticalAlignment="Center" FontWeight="Bold" />
         <TextBlock x:Name="Position" Grid.Row="5" Grid.Column="0" Text="Position" FontSize="13" VerticalAlignment="Center"  FontWeight="Bold" />
 
-        <TextBlock Name ="SpeedValueOut" Text ="{x:Bind PageHandler.ParameterText.SpeedText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"  Grid.Row="4"  MinWidth="70" Margin="5, 0, 0, 0" TextAlignment="Left" FontSize="13" TextWrapping="Wrap"  VerticalAlignment="Center" FontStyle="Italic" />
+        <TextBlock Name ="SpeedValueOut" Text ="speed = 0 km/h" HorizontalAlignment="Left"  Grid.Row="4"  MinWidth="70" Margin="5, 0, 0, 0" TextAlignment="Left" FontSize="13" TextWrapping="Wrap"  VerticalAlignment="Center" FontStyle="Italic" />
 
-        <TextBox IsReadOnly="True" Name ="PositionOut" Text ="{x:Bind PageHandler.ParameterText.PositionText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left"  Grid.Row="6"  Grid.RowSpan="3" MinWidth="70" MinHeight="100" Margin="5, 0, 0, 0" TextAlignment="Left" FontSize="10" TextWrapping="Wrap" VerticalAlignment="Center"  FontStyle="Italic"/>
+        <TextBox IsReadOnly="True" Name ="PositionOut" Text ="x: 0, y: 0"  HorizontalAlignment="Left"  Grid.Row="6"  Grid.RowSpan="3" MinWidth="70" MinHeight="100" Margin="5, 0, 0, 0" TextAlignment="Left" FontSize="10" TextWrapping="Wrap" VerticalAlignment="Center"  FontStyle="Italic"/>
 
         <TextBlock 
             x:Name="Map"
@@ -65,7 +65,7 @@
 
             />
 
-        <!-- steering wheel-->
+         steering wheel
         <Image
             Name="RotatingImage" 
             Source="/Images/stwheel.jpg"
@@ -92,12 +92,11 @@
             Minimum="-180"
             MinWidth="50"
             MaxWidth="100"
-            Value= "{x:Bind PageHandler.SteeringWheel.SteeringValue, Mode=TwoWay}"
+            Value= "0"
             VerticalAlignment="Bottom" 
             ValueChanged="RotationSlider_ValueChanged" 
              />
 
-        <!--Buttons-->
         <Grid
             Grid.Row="1"
             Grid.Column="0"
@@ -172,7 +171,7 @@
             VerticalAlignment="Center"
             OffContent="Fw"
             OnContent="Rev"
-            IsOn="{x:Bind PageHandler.GearShift.GearShiftValue, Mode=TwoWay}"
+            IsOn="false"
             Toggled="Gearshift_Toggled"
             />
 
@@ -183,18 +182,19 @@
                 <Line Stroke="Red" X1="0" X2="250" Y1="125" Y2="125"></Line>
                 <Line Stroke="Red" X1="125" X2="125" Y1="0" Y2="250"></Line>
 
-                <Rectangle Name="Car" 
+                <Rectangle 
+                    Name="Car" 
                            Width="10" 
                            Height="20" 
-                           Canvas.Left="{x:Bind PageHandler.DisplayRobot.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                           Canvas.Top="{x:Bind PageHandler.DisplayRobot.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                           Canvas.Left="0" 
+                           Canvas.Top="0" 
                            RadiusX="1.5" 
                            RadiusY="1.5"
                            Fill="#FF521681" 
                            RenderTransformOrigin="0.5,0.5">
 
                     <Rectangle.RenderTransform>
-                        <CompositeTransform Rotation="{x:Bind PageHandler.DisplayRobot.Orientation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <CompositeTransform Rotation="0"/>
                     </Rectangle.RenderTransform>
                 </Rectangle>
 
@@ -203,4 +203,5 @@
         </Grid>
 
     </Grid>
-</Page>
+    -->
+</UserControl>
