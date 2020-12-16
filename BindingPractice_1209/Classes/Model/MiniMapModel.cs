@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace RobotDiagnosticApp.Classes.Model
 {
+    //this observable model class is for handling the minimap and the written positions
     class MiniMapModel : ObservableObject
     {
         private double _x;

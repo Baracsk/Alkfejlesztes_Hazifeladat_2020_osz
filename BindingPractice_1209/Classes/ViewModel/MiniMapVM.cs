@@ -9,8 +9,10 @@ using RobotDiagnosticApp.Classes.Model;
 
 namespace RobotDiagnosticApp.Classes.ViewModel
 {
+    //This class contains the viewmodel of the minimap
     public class MiniMapVM : ObservableObject
     {
+        //defining the offset from the basepoint of the minimap
         private const int CENTERX_OFFSET = 145;
         private const int CENTERY_OFFSET = 140;
 
@@ -44,7 +46,6 @@ namespace RobotDiagnosticApp.Classes.ViewModel
             get => Model.Orientation;
             set => Model.Orientation = value;
         }
-
         public string PositionText
         {
             get => _positionText;
@@ -64,12 +65,14 @@ namespace RobotDiagnosticApp.Classes.ViewModel
 
         }
 
+        //resets the position related values asyncronously
         internal async Task Reset()
         {
             positionTextList.Clear();
             await UpdatePositionParameters(0, 0, 0);
         }
 
+        //
         private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(X) || e.PropertyName == nameof(Y))
@@ -79,6 +82,7 @@ namespace RobotDiagnosticApp.Classes.ViewModel
             Notify(e.PropertyName);
         }
 
+        //Converting position into a text and appending to the queue of last 10 position elements
         private async Task WriteNewPosition()
         {
             string NewTextElement = String.Format("x: {0:0.00} y: {1:0.00}", X, Y);
@@ -102,6 +106,7 @@ namespace RobotDiagnosticApp.Classes.ViewModel
 
             positionTextList.Enqueue(newText);
         }
+
 
         public async Task UpdatePositionParameters(double X, double Y, int orientation)
         {

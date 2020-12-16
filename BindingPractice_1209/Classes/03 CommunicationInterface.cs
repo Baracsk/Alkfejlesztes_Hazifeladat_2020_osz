@@ -81,6 +81,8 @@ namespace RobotDiagnosticApp.Classes
         
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
+
+            //***********************MOVE IS FOR TEST ONLY**********************
             Move();
             UpdateCommunicatinData();
         }
@@ -100,7 +102,7 @@ namespace RobotDiagnosticApp.Classes
         }
         public void Test()
         {
-            setNewParameters(0.10, 0.0, 20);
+            
             sentIsSelfTest = true;
         }
         private async Task UpdateCommunicatinData()
@@ -149,11 +151,11 @@ namespace RobotDiagnosticApp.Classes
             MiniMap.UpdatePositionParameters(recvX, Y, orientation);
         }
 
-        //code for testing 
+        //**********************FOR TEST ONLY*************************************** 
         private void Move()
         {
             int sign = (sentisReverse) ? -1 : 1;
-            recvOrientation += sentSteeringWheelAngle*sentSpeed / 500;
+            recvOrientation += sentSteeringWheelAngle*sentSpeed / 1000;
             recvX += sign*(sentSpeed * Math.Sin(recvOrientation * Math.PI / 180))*0.02;
             recvY += sign*(sentSpeed * Math.Cos(recvOrientation * Math.PI / 180))*0.02;
         }

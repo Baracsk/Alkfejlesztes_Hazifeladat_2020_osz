@@ -10,6 +10,7 @@ using System.Windows.Input;
 
 namespace RobotDiagnosticApp.Classes.ViewModel
 {
+    //this is the View model for the driver interface. It handles the gearshift and the speedometer text
     public class DrivingInterfaceVM : ObservableObject
     {
         private DrivingInterfaceModel Model;
@@ -36,6 +37,7 @@ namespace RobotDiagnosticApp.Classes.ViewModel
             }
         }
 
+        //Commands for the buttons
         public ICommand AccelerateButtonClicked
         {
             get
@@ -65,6 +67,7 @@ namespace RobotDiagnosticApp.Classes.ViewModel
             Model.PropertyChanged += Model_PropertyChanged;
         }
 
+
         private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Speed))
@@ -74,13 +77,14 @@ namespace RobotDiagnosticApp.Classes.ViewModel
             Notify(e.PropertyName);
         }
 
+        //resets the values of the model class
         internal async Task Reset()
         {
             Speed = 0;
             GearShiftInReverse = false;
         }
 
-
+        //writes the speed
         private async Task WriteNewSpeed()
         {
             SpeedText = String.Format("{0:0.00} km/h", (Speed * Constants.MAX_SPEED/100));

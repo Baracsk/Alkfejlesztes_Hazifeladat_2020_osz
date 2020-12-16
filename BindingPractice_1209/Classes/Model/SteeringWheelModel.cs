@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace RobotDiagnosticApp.Classes.Model
 {
+    //this model class has the value of the SteewingWheel andle
     public class SteeringWheelModel : ObservableObject
     {
         private int _angle;
@@ -23,17 +24,6 @@ namespace RobotDiagnosticApp.Classes.Model
         public SteeringWheelModel(int SteeringWheelAngle = 0)
         {
             this.Angle = SteeringWheelAngle;
-        }
-
-        public void SteerRight()
-        {
-            if ((Angle += Constants.STEER_CHANGE_SCALE) <= 90) { }
-            else Angle = 90;
-        }
-        public void SteerLeft()
-        {
-            if ((Angle -= Constants.STEER_CHANGE_SCALE) >= -90) { }
-            else Angle = -90;
         }
     }
 }

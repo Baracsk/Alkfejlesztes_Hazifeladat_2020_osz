@@ -18,21 +18,6 @@ namespace RobotDiagnosticApp.Classes.ViewModel
             set => Model.Angle = value;
         }
 
-        public ICommand SteerLeftClicked
-        {
-            get
-            {
-                return new DelegateCommand(Model.SteerLeft);
-            }
-        }
-        public ICommand SteerRightClicked
-        {
-            get
-            {
-                return new DelegateCommand(Model.SteerRight);
-            }
-        }
-
         public SteeringWheelVM(int SteeringWheelAngle = 0)
         {
             Model = new SteeringWheelModel(SteeringWheelAngle);
