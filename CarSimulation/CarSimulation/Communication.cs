@@ -16,7 +16,7 @@ namespace CarSimulation
         //To Receive
         public void Com_Set_Desired_Speed(double speed)
         {
-            Com_car.Desired_speed = speed;
+            Com_car.Desired_speed = speed/3.6;
         }
         public void Com_Set_Wheel(double wheel_angle)
         {

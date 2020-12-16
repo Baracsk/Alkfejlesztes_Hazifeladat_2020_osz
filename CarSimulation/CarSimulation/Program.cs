@@ -11,7 +11,7 @@ namespace CarSimulation
 
             Car mycar = new Car(2, 500, 20, 0.2, 1);
             mycar.Car_Change_Direction(30);
-            mycar.Desired_speed = 7.0;
+            mycar.Desired_speed = 120.0;
             Timer mytimer = new Timer(Run_Car, mycar, 0, 1000);
             Communication Com_Modul = new Communication(mycar);
 
