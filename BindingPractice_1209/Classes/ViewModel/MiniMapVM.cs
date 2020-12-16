@@ -11,8 +11,8 @@ namespace RobotDiagnosticApp.Classes.ViewModel
 {
     public class MiniMapVM : ObservableObject
     {
-        private const int CENTERX_OFFSET = 120;
-        private const int CENTERY_OFFSET = 115;
+        private const int CENTERX_OFFSET = 145;
+        private const int CENTERY_OFFSET = 140;
 
         MiniMapModel Model;
 
@@ -105,10 +105,17 @@ namespace RobotDiagnosticApp.Classes.ViewModel
 
         public async Task UpdatePositionParameters(double X, double Y, int orientation)
         {
+            //checking if vehicle moved
+            bool isPositionChanged = (this.X != X || this.Y != Y);
+
             this.X = X;
             this.Y = Y;
-            await WriteNewPosition();
             Orientation = orientation;
+
+            if (isPositionChanged)
+            { 
+                await WriteNewPosition(); 
+            }
         }
     }
 }
