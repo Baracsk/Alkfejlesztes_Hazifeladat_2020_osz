@@ -22,12 +22,13 @@ namespace RobotDiagnosticApp.Classes
         //Variables for the communication
         private Timer timer;
 
-        //recieved
+        //recieved (POST)
         private double recvX;
         private double recvY;
         private int recvOrientation;
 
-        //sent
+        
+        //sent (GET)
         private int sentSpeed;
         private int sentSteeringWheelAngle;
         private bool sentisReverse;
