@@ -49,7 +49,7 @@ namespace RobotDiagnosticApp.Classes.Model
         }
         public void Brake()
         {
-            if ((Speed -= Constants.SPEED_CHANGE_SCALE) >= 0) { }
+            if ((Speed -= Constants.SPEED_CHANGE_SCALE*2) >= 0) { }
             else Speed = 0;
         }
         public void EStop()

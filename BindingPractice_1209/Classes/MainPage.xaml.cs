@@ -30,19 +30,8 @@ namespace DiagnosticApp
         public MainPage()
         {
             this.InitializeComponent();
-
             Interface = new CommunicationInterface();
-            
         }
 
-        private void Brake_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void EStop_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

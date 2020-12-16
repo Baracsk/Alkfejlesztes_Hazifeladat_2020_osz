@@ -155,7 +155,7 @@
             MinWidth="50" 
             Margin="0,5,5,5"
             Command="{x:Bind Interface.DrivingInterface.BrakeButtonClicked, Mode=OneWay}"
-            Background="#FF1E1D1D" Click="Brake_Click" />
+            Background="#FF1E1D1D" />
 
         <Button 
             Name ="EStop"
@@ -167,7 +167,7 @@
             MinWidth="100" 
             Margin="0,5,5,5"
             Command="{x:Bind Interface.DrivingInterface.EStopButtonClicked, Mode=OneWay}"
-            Background="#FFC70707" Click="EStop_Click" />
+            Background="#FFC70707" />
 
         <ToggleSwitch 
             x:Name="GearShift"

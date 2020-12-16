@@ -116,7 +116,6 @@ namespace RobotDiagnosticApp.Classes.ViewModel
             { 
                 await WriteNewPosition(); 
             }
-            
         }
     }
 }
