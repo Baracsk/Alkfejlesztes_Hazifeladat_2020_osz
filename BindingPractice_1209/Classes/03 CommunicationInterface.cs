@@ -149,9 +149,10 @@ namespace RobotDiagnosticApp.Classes
 
         private void Move()
         {
-            recvOrientation += sentSteeringWheelAngle / 15;
-            recvX += (sentSpeed * Math.Sin(recvOrientation * Math.PI / 180))*0.1;
-            recvY += (sentSpeed * Math.Cos(recvOrientation * Math.PI / 180))*0.1;
+            int sign = (sentisReverse) ? -1 : 1;
+            recvOrientation += sentSteeringWheelAngle*sentSpeed / 100;
+            recvX += sign*(sentSpeed * Math.Sin(recvOrientation * Math.PI / 180))*0.1;
+            recvY += sign*(sentSpeed * Math.Cos(recvOrientation * Math.PI / 180))*0.1;
         }
     }
 }

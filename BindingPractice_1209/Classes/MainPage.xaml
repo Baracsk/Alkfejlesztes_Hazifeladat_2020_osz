@@ -121,18 +121,6 @@
         </Grid>
 
         <Button 
-                Name ="SteerLeft"
-                Content="Left" 
-                Grid.Row="3" 
-                
-                Height="30" 
-                MinWidth="50" 
-                Grid.Column="1" 
-                VerticalAlignment="Center"
-                Margin="5,5,0,5" 
-                Command="{x:Bind Interface.SteeringWheel.SteerLeftClicked, Mode=OneWay}"
-                />
-        <Button 
                 Name ="StartTimer"
                 Content="Start" 
                 Grid.Row="1" 
@@ -144,18 +132,7 @@
                 Command="{x:Bind Interface.StartButtonClicked, Mode=OneWay}"
                 />
         
-        <Button 
-                Name ="SteerRight"
-                Content="Right" 
-                Grid.Row="3" 
-                Height="30" 
-                MinWidth="50" 
-                Grid.Column="1" 
-                VerticalAlignment="Center"
-                HorizontalAlignment="Right"
-                Margin="0,5,5,5" 
-                Command="{x:Bind Interface.SteeringWheel.SteerRightClicked, Mode=OneWay}"
-                />
+        
 
         <Button 
             Name ="Accelerate"
@@ -202,9 +179,20 @@
             VerticalAlignment="Center"
             OffContent="Fw"
             OnContent="Rev"
-            IsOn="false"
+            IsOn="{x:Bind Interface.DrivingInterface.GearShiftInReverse, Mode=TwoWay}"
             />
-        
+
+        <Slider 
+            x:Name="SteerSlider"
+            Grid.Row="4" 
+            Grid.Column="1" 
+            MinWidth="50"
+            MaxWidth="120"
+            Minimum="-90"
+            Maximum="90"
+            Value="{x:Bind Interface.SteeringWheel.Angle, Mode=TwoWay}"
+            />
+
         <!-- Minimap-->
         <Grid Grid.Row="2" Background="#FF5B5B5B" Grid.Column="2" Grid.RowSpan="7" Grid.ColumnSpan="2">
 
