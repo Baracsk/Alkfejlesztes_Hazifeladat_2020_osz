@@ -12,6 +12,6 @@ namespace RobotDiagnosticApp
         public const int STEER_CHANGE_SCALE = 10;
 
         public const int MAX_SPEED = 120;
-        public const int SYSTEM_TICK_MS = 100;
+        public const int SYSTEM_TICK_MS = 1000;
     }
 }

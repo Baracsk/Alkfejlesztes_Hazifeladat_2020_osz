@@ -60,21 +60,30 @@ namespace RobotDiagnosticApp.Classes.ViewModel
             Model = new MiniMapModel(X, Y, Orientation);
 
             Model.PropertyChanged += Model_PropertyChanged;
-
             positionTextList = new Queue<string>();
 
         }
 
+        internal async Task Reset()
+        {
+            positionTextList.Clear();
+            await UpdatePositionParameters(0, 0, 0);
+        }
+
         private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            
+            if (e.PropertyName == nameof(X) || e.PropertyName == nameof(Y))
+            {
+                Notify("map" + e.PropertyName);
+            }
             Notify(e.PropertyName);
         }
-        private void WriteNewPosition()
+
+        private async Task WriteNewPosition()
         {
             string NewTextElement = String.Format("x: {0:0.00} y: {1:0.00}", X, Y);
 
-            UpdatePositionTextList(NewTextElement);
+            await UpdatePositionTextList(NewTextElement);
 
             string Merged = "";
             foreach (string element in positionTextList)
@@ -84,7 +93,7 @@ namespace RobotDiagnosticApp.Classes.ViewModel
             PositionText = Merged;
         }
 
-        private void UpdatePositionTextList(string newText)
+        private async Task UpdatePositionTextList(string newText)
         {
             if (positionTextList.Count() >= 10)
             {
@@ -94,11 +103,11 @@ namespace RobotDiagnosticApp.Classes.ViewModel
             positionTextList.Enqueue(newText);
         }
 
-        public void UpdatePositionParameters(double X, double Y, int orientation)
+        public async Task UpdatePositionParameters(double X, double Y, int orientation)
         {
             this.X = X;
             this.Y = Y;
-            WriteNewPosition();
+            await WriteNewPosition();
             Orientation = orientation;
         }
     }

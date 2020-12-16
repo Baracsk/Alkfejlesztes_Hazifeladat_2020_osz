@@ -133,6 +133,18 @@
                 Command="{x:Bind Interface.SteeringWheel.SteerLeftClicked, Mode=OneWay}"
                 />
         <Button 
+                Name ="StartTimer"
+                Content="Start" 
+                Grid.Row="1" 
+                Height="30" 
+                MinWidth="50" 
+                Grid.Column="1" 
+                VerticalAlignment="Center"
+                Margin="5,5,0,5" 
+                Command="{x:Bind Interface.StartButtonClicked, Mode=OneWay}"
+                />
+        
+        <Button 
                 Name ="SteerRight"
                 Content="Right" 
                 Grid.Row="3" 

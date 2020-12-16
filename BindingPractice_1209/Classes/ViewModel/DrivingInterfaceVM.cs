@@ -74,14 +74,14 @@ namespace RobotDiagnosticApp.Classes.ViewModel
             Notify(e.PropertyName);
         }
 
-        internal void Reset()
+        internal async Task Reset()
         {
             Speed = 0;
             GearShiftInReverse = false;
         }
 
 
-        private void WriteNewSpeed()
+        private async Task WriteNewSpeed()
         {
             SpeedText = String.Format("{0:0.00} km/h", (Speed * Constants.MAX_SPEED/100));
         }
