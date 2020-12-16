@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Navigation;
 using RobotDiagnosticApp.Classes;
 using System.Threading.Tasks;
 using RobotDiagnosticApp.Classes.ViewModel;
-using BindingPractice_1209.Classes.Model;
+using RobotDiagnosticApp.Classes.Model;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -35,6 +35,13 @@ namespace DiagnosticApp
             
         }
 
+        private void Brake_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EStop_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

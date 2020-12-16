@@ -9,21 +9,26 @@ namespace RobotDiagnosticApp.Classes.Model
 {
     class DrivingInterfaceModel : ObservableObject
     {
+        private bool _gearShiftInReverse;
+        private int _speed;
+
         public bool GearShiftInReverse
         {
-            get { return GearShiftInReverse; }
+            get => _gearShiftInReverse;
             set
             {
-                GearShiftInReverse = value;
-                RaisePropertyChangedEvent("GearShiftInReverse");
+                _gearShiftInReverse = value;
+                Notify();
             }
         }
+
         public int Speed 
-        { 
-            get { return Speed; } 
+        {
+            get => _speed;
             set
             {
-                Speed = value;
+                _speed = value;
+                Notify();
             }
         }
 
@@ -37,6 +42,7 @@ namespace RobotDiagnosticApp.Classes.Model
         {
             if ((Speed += Constants.SPEED_CHANGE_SCALE) <= 100) { }
             else Speed = 100;
+            Notify(nameof(Speed));
         }
         public void Brake()
         {

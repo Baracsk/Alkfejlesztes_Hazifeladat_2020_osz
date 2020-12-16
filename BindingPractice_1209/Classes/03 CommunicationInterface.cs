@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Timers;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -16,14 +17,103 @@ namespace RobotDiagnosticApp.Classes
         public MiniMapVM MiniMap;
         public SteeringWheelVM SteeringWheel;
 
+        //Variables for the communication
+        private Timer timer;
+
+        //recieved
+        private double recvX;
+        private double recvY;
+        private int recvOrientation;
+
+        //sent
+        private int sentSpeed;
+        private int sentSteeringWheelAngle;
+        private bool sentisReverse;
+        private bool sentIsReset = false;
+        private bool sentIsSelfTest = false;
+
+        public ICommand TestButtonClicked
+        {
+            get
+            {
+                return new DelegateCommand(Test);
+            }
+        }
+        public ICommand ResetButtonClicked
+        {
+            get
+            {
+                return new DelegateCommand(Reset);
+            }
+        }
+
+
+        public ICommand StartButtonClicked
+        {
+            get
+            {
+                return new DelegateCommand(Start);
+            }
+        }
 
         public CommunicationInterface()
         {
             DrivingInterface = new DrivingInterfaceVM();
             MiniMap = new MiniMapVM();
             SteeringWheel = new SteeringWheelVM();
-            
+
+            recvX = 0;
+            recvY = 0;
+            recvOrientation = 0;
+
+            timer = new Timer(Constants.SYSTEM_TICK_MS);
+            //timer.Elapsed += Timer_Elapsed;
+
         }
+
+        public void Start()
+        {
+            timer.Start();
+        }
+
+        /*
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Invoke(new Action(() => { UpdateCommunicatinData(); }));
+            recvX += 10;
+            UpdateCommunicatinData();
+        }*/
+
+        public void Reset()
+        {
+            DrivingInterface.Reset();
+            SteeringWheel.Reset();
+            MiniMap.Reset();
+            sentIsReset = true;
+        }
+        public void Test()
+        {
+            setNewParameters(0.10, 0.0, 20);
+            sentIsSelfTest = true;
+        }
+        private void UpdateCommunicatinData()
+        {
+            //writing the senable parameters of the class
+            sentSpeed = getSpeed();
+            sentSteeringWheelAngle = getSteewingWheelAngle();
+            sentisReverse = isGearBoxInReverse();
+
+            //TODO COMMUNICATE
+
+            //write back the recieved parameters
+            
+            setNewParameters(recvX, recvY, recvOrientation);
+        }
+            
+    
+
+
+
         //*************FOR COMMUNICATION*******************
 
         //TO SEND

@@ -36,13 +36,14 @@
 
         <Grid Grid.Row="1" Grid.RowSpan="8" Grid.Column="0" Background="#FF00151E" />
         <Grid Grid.Row="1" Grid.RowSpan="8" Grid.Column="1" Grid.ColumnSpan="4" Background="Transparent" BorderThickness="1" BorderBrush="White" />
-
+        
+        <!-- Text elements-->
         <TextBlock x:Name="Speed" Grid.Row="3" Grid.Column="0" Text="Speed:" FontSize="13" VerticalAlignment="Center" FontWeight="Bold" />
         <TextBlock x:Name="Position" Grid.Row="5" Grid.Column="0" Text="Position" FontSize="13" VerticalAlignment="Center"  FontWeight="Bold" />
 
-        <TextBlock Name ="SpeedValueOut" Text ="{x:Bind Interface.TextVM.PositionText, Mode=OneWay}" HorizontalAlignment="Left"  Grid.Row="4"  MinWidth="70" Margin="5, 0, 0, 0" TextAlignment="Left" FontSize="13" TextWrapping="Wrap"  VerticalAlignment="Center" FontStyle="Italic" />
+        <TextBlock Name ="SpeedValueOut" Text ="{x:Bind Interface.DrivingInterface.SpeedText, Mode=OneWay}" HorizontalAlignment="Left"  Grid.Row="4"  MinWidth="70" Margin="5, 0, 0, 0" TextAlignment="Left" FontSize="13" TextWrapping="Wrap"  VerticalAlignment="Center" FontStyle="Italic" />
 
-        <TextBox IsReadOnly="True" Name ="PositionOut" Text ="{x:Bind Interface.TextVM.SpeedText, Mode=OneWay}"  HorizontalAlignment="Left"  Grid.Row="6"  Grid.RowSpan="3" MinWidth="70" MinHeight="100" Margin="5, 0, 0, 0" TextAlignment="Left" FontSize="10" TextWrapping="Wrap" VerticalAlignment="Center"  FontStyle="Italic"/>
+        <TextBox IsReadOnly="True" Name ="PositionOut" Text ="{x:Bind Interface.MiniMap.PositionText, Mode=OneWay}"  HorizontalAlignment="Left"  Grid.Row="6"  Grid.RowSpan="3" MinWidth="70" MinHeight="100" Margin="5, 0, 0, 0" TextAlignment="Left" FontSize="10" TextWrapping="Wrap" VerticalAlignment="Center"  FontStyle="Italic"/>
 
         <TextBlock 
             x:Name="Map"
@@ -66,7 +67,7 @@
 
             />
 
-        <!-- steering wheel-->
+        <!-- Images-->
         <Image
             x:Name="SteerWheelImg" 
             Source="/Images/stwheel.jpg"
@@ -81,23 +82,11 @@
             Grid.RowSpan="3"
             >
             <Image.RenderTransform>
-                <CompositeTransform Rotation="{x:Bind rotationSlider.Value, Mode=OneWay}" />
+                <CompositeTransform Rotation="{x:Bind Interface.SteeringWheel.Angle, Mode=OneWay}" />
             </Image.RenderTransform>
         </Image>
 
-        <Slider 
-            x:Name="rotationSlider" 
-            Grid.Row="4"
-            Grid.Column="1"
-            Maximum="180" 
-            Minimum="-180"
-            MinWidth="50"
-            MaxWidth="100"
-            Value= "0"
-            VerticalAlignment="Bottom" 
-            ValueChanged="rotationSlider_ValueChanged" 
-            
-            />
+        
 
         <!--Buttons-->
         <Grid
@@ -109,13 +98,13 @@
                 Name ="Test"
                 Content="Test" 
                 Grid.Row="2" 
-                
                 Height="30" 
                 MinWidth="50" 
                 Grid.Column="0" 
                 VerticalAlignment="Bottom"
                 Margin="5,0,0,5" 
-                Click="Test_Button_Click"/>
+                Command="{x:Bind Interface.TestButtonClicked, Mode=OneWay}"
+                />
 
             <Button 
                 Name ="Reset"
@@ -126,11 +115,47 @@
                 Grid.Column="0" 
                 VerticalAlignment="Top"
                 Margin="5,15,0,5" 
-                Click="Reset_Button_Click"
-                Command="{x:Bind Interface.InterfaceVM.SteeringWheelAngleChanged}"
+                Command="{x:Bind Interface.ResetButtonClicked, Mode=OneWay}"
                 />
 
         </Grid>
+
+        <Button 
+                Name ="SteerLeft"
+                Content="Left" 
+                Grid.Row="3" 
+                
+                Height="30" 
+                MinWidth="50" 
+                Grid.Column="1" 
+                VerticalAlignment="Center"
+                Margin="5,5,0,5" 
+                Command="{x:Bind Interface.SteeringWheel.SteerLeftClicked, Mode=OneWay}"
+                />
+        <Button 
+                Name ="StartTimer"
+                Content="Start" 
+                Grid.Row="1" 
+                Height="30" 
+                MinWidth="50" 
+                Grid.Column="1" 
+                VerticalAlignment="Center"
+                Margin="5,5,0,5" 
+                Command="{x:Bind Interface.StartButtonClicked, Mode=OneWay}"
+                />
+        
+        <Button 
+                Name ="SteerRight"
+                Content="Right" 
+                Grid.Row="3" 
+                Height="30" 
+                MinWidth="50" 
+                Grid.Column="1" 
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Margin="0,5,5,5" 
+                Command="{x:Bind Interface.SteeringWheel.SteerRightClicked, Mode=OneWay}"
+                />
 
         <Button 
             Name ="Accelerate"
@@ -142,6 +167,7 @@
             HorizontalAlignment="Left"
             Margin="5,5,0,5"
             Background="#33BEBEBE"
+            Command="{x:Bind Interface.DrivingInterface.AccelerateButtonClicked, Mode=OneTime}"
             />
 
         <Button 
@@ -153,6 +179,7 @@
             Height="30" 
             MinWidth="50" 
             Margin="0,5,5,5"
+            Command="{x:Bind Interface.DrivingInterface.BrakeButtonClicked, Mode=OneWay}"
             Background="#FF1E1D1D" Click="Brake_Click" />
 
         <Button 
@@ -164,7 +191,7 @@
             Height="30" 
             MinWidth="100" 
             Margin="0,5,5,5"
-
+            Command="{x:Bind Interface.DrivingInterface.EStopButtonClicked, Mode=OneWay}"
             Background="#FFC70707" Click="EStop_Click" />
 
         <ToggleSwitch 
@@ -175,10 +202,10 @@
             VerticalAlignment="Center"
             OffContent="Fw"
             OnContent="Rev"
-            IsOn="false" Toggled="GearShift_Toggled"
-
+            IsOn="false"
             />
-
+        
+        <!-- Minimap-->
         <Grid Grid.Row="2" Background="#FF5B5B5B" Grid.Column="2" Grid.RowSpan="7" Grid.ColumnSpan="2">
 
             <Canvas Width="250" Height="250" Background="Beige">
@@ -190,15 +217,15 @@
                     Name="Car" 
                            Width="10" 
                            Height="20" 
-                           Canvas.Left="{x:Bind Interface.MapVM.X, Mode=OneWay}" 
-                           Canvas.Top="{x:Bind Interface.MapVM.Y, Mode=OneWay}" 
+                           Canvas.Left="{x:Bind Interface.MiniMap.mapX, Mode=OneWay}" 
+                           Canvas.Top="{x:Bind Interface.MiniMap.mapY, Mode=OneWay}" 
                            RadiusX="1.5" 
                            RadiusY="1.5"
                            Fill="#FF521681" 
                            RenderTransformOrigin="0.5,0.5">
 
                     <Rectangle.RenderTransform>
-                        <CompositeTransform Rotation="{x:Bind Interface.MapVM.Orientation, Mode=OneWay}"/>
+                        <CompositeTransform Rotation="{x:Bind Interface.MiniMap.Orientation, Mode=OneWay}"/>
                     </Rectangle.RenderTransform>
                 </Rectangle>
 

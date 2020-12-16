@@ -1,4 +1,4 @@
-﻿using BindingPractice_1209;
+﻿
 using RobotDiagnosticApp.Classes;
 using RobotDiagnosticApp.Classes.Model;
 using System;
@@ -14,23 +14,27 @@ namespace RobotDiagnosticApp.Classes.ViewModel
     {
         private DrivingInterfaceModel Model;
 
+        private string _speedtext;
+
         public bool GearShiftInReverse
         {
             get => Model.GearShiftInReverse;
+            set => Model.GearShiftInReverse = value;
         }
         public int Speed
         {
             get => Model.Speed;
+            set => Model.Speed = value;
         }
         public string SpeedText
         {
-            get { return SpeedText; }
+            get => _speedtext;
             set
             {
-                SpeedText = value;
+                _speedtext = value;
+                Notify();
             }
         }
-
 
         public ICommand AccelerateButtonClicked
         {
@@ -53,7 +57,7 @@ namespace RobotDiagnosticApp.Classes.ViewModel
                 return new DelegateCommand(Model.EStop);
             }
         }
-
+        
         //Constructor
         public DrivingInterfaceVM(double SteeringWheelAngle = 0, bool GearShiftInReverse = false, double X=0, double Y=0, int Speed=0, int Orientation = 0)
         {
@@ -63,24 +67,23 @@ namespace RobotDiagnosticApp.Classes.ViewModel
 
         private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Speed" || e.PropertyName == "GearShiftInReverse")
+            if (e.PropertyName == nameof(Speed))
             {
-                if(e.PropertyName == "Speed")
-                {
-                    WriteNewSpeed();
-                }
-                Notify(e.PropertyName);
+                WriteNewSpeed();
             }
+            Notify(e.PropertyName);
         }
 
-        //notify 
-        private void Notify(string PropertyName)
+        internal async Task Reset()
         {
-            RaisePropertyChangedEvent(PropertyName);
+            Speed = 0;
+            GearShiftInReverse = false;
         }
-        private void WriteNewSpeed()
+
+
+        private async Task WriteNewSpeed()
         {
-            SpeedText = String.Format("{0:00} km/h", (Speed/100 * Constants.MAX_SPEED));
+            SpeedText = String.Format("{0:0.00} km/h", (Speed * Constants.MAX_SPEED/100));
         }
 
     }
