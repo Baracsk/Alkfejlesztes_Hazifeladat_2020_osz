@@ -35,11 +35,15 @@ namespace CarSimulation
         //To Send
         public double Com_Get_X_Position()
         {
-            return Com_car.Car_Get_XPos();
+            return Com_car.Car_Get_XPos() - 125;
         }
         public double Com_Get_Y_Position()
         {
-            return Com_car.Car_Get_YPos();
+            return Com_car.Car_Get_YPos() - 125;
         }
+        public double Com_Get_Orientation()
+        {​​​​​​
+            return Com_car.Car_Get_Direction();
+        }​​​​​​
     }
 }

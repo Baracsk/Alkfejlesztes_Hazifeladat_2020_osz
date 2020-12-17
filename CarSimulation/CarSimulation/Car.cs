@@ -134,6 +134,10 @@ namespace CarSimulation
             }
             wheel_direction = wheel;
         }
+        public double Car_Get_Direction()
+        {​​​​​​
+            return carMovement.Direction;
+        }​​​​​​
 
         public double Car_Get_XPos()
         {

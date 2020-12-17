@@ -35,6 +35,11 @@ namespace CarSimulation
             get { return acceleration; }
             set { acceleration = value; }
         }
+        public double Direction
+        {​​​​​​
+            get {​​​​​​ return direction; }​​​​​​
+            set {​​​​​​ direction = value; }​​​​​​
+        }​​​​​​
         public double Delta_x
         {
             get { return delta_x; }
