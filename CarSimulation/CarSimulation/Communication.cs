@@ -41,10 +41,11 @@ namespace CarSimulation
         {
             return Com_car.Car_Get_YPos() - 125;
         }
+
         public double Com_Get_Orientation()
-        {​​​​​​
+        {
             return Com_car.Car_Get_Direction();
-        }​​​​​​       
+        }    
         public void Com_Reset_Car()
         {
             Com_car.Car_Reset();

@@ -133,7 +133,6 @@
     </Compile>
     <Compile Include="Classes\ViewModel\SteeringWheelVM.cs" />
     <Compile Include="Classes\RecvData.cs" />
-    <Compile Include="HTTPlistener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\SendData.cs" />
   </ItemGroup>

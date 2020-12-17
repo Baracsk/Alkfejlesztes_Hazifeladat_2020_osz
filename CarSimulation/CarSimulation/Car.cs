@@ -26,7 +26,6 @@ namespace CarSimulation
             wheel_direction = 0;
         }
 
-
         CarSimulation.Engine carEngine;
         CarSimulation.Road carRoad;
         CarSimulation.Calculator carCalculator;
@@ -135,10 +134,9 @@ namespace CarSimulation
             wheel_direction = wheel;
         }
         public double Car_Get_Direction()
-        {​​​​​​
+        {
             return carMovement.Direction;
-        }​​​​​​
-
+        }
         public double Car_Get_XPos()
         {
             return carPosition.Pos_x;

@@ -10,7 +10,7 @@ namespace CarSimulation
     class ClientCalls
     {
         private static readonly HttpClient client = new HttpClient();
-        private const string URI = "http://localhost:8000/data";
+        private const string URI = "http://localhost:8000/data/";
 
         // Sends a GET request to Server, the content is returned as a string
         public async Task<string> GetDataStringAsync()

@@ -46,7 +46,7 @@ namespace RobotDiagnosticApp.Classes
         private RecvData recvData;
         private SendData sendData;
 
-        private const string URI = "http://localhost:8000/data";
+        private const string URI = "http://localhost:8000/data/";
         private Thread lThread;
         private static HttpListener listener;
 

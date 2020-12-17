@@ -10,7 +10,7 @@ namespace BindingPractice_1209
     {
         public double recvX { get; set; }
         public double recvY { get; set; }
-        public int recvOrientation { get; set; }
+        public double recvOrientation { get; set; }
 
 
     }
