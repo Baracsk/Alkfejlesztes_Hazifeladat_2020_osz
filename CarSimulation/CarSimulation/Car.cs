@@ -151,5 +151,28 @@ namespace CarSimulation
         {
             return carMovement.Speed;
         }
+
+        public void Car_Reset()
+        {
+            carPosition.Pos_x = 126;
+            carPosition.Pos_y = 126;
+            carRoad.Road_Refresh_Tile(carPosition);
+            for (int x = 0; x < carGearbox.Number_of_gear - 1; x++)
+            {
+                carGearbox.Gear_box_change_gear(0);
+            }
+            carEngine.Rpm = 0;
+            carMovement.Speed = 0;
+            carMovement.Direction = 0;
+            carMovement.Acceleration = 0;
+            carMovement.Movement_Refresh(0, 0, 0, 1, 0);
+
+
+
+            accelerator_value = 0;
+            break_value = 0;
+            desired_speed = 0;
+            wheel_direction = 0;
+        }
     }
 }

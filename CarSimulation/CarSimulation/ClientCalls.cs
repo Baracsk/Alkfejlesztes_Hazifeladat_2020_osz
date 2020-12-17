@@ -12,6 +12,7 @@ namespace CarSimulation
         private static readonly HttpClient client = new HttpClient();
         private const string URI = "http://localhost:8000/data";
 
+        // Sends a GET request to Server, the content is returned as a string
         public async Task<string> GetDataStringAsync()
         {
             var result = await client.GetAsync(URI);
@@ -19,8 +20,16 @@ namespace CarSimulation
             return stringres;
         }
 
+        // Sends a GET request to Server, the content is returned as the received Data (SendData from the Client's side)
+        public async Task<GetData> GetDataAsync()
+        {
+            string stringres = await this.GetDataStringAsync();
+            GetData result = JsonConvert.DeserializeObject<GetData>(stringres);
+            return result;
+        }
 
-        public async Task<string> PostDataAsync(RecvData data)
+        //Sends a POST request to the Server (RecvData from the Client's side)
+        public async Task<string> PostDataAsync(PostData data)
         {
             string jsonString = JsonConvert.SerializeObject(data);
             StringContent content = new StringContent(jsonString);
