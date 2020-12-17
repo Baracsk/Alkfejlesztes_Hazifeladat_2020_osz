@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Core;
 using Windows.ApplicationModel.Core;
+using System.Diagnostics;
 
 namespace RobotDiagnosticApp.Classes 
 {
@@ -90,8 +91,9 @@ namespace RobotDiagnosticApp.Classes
         public void Reset()
         {
             DrivingInterface.Reset();
-            SteeringWheel.Reset();
             MiniMap.Reset();
+
+            SteeringWheel.Reset();
             sentIsReset = true;
 
             timer.Stop();
@@ -100,11 +102,14 @@ namespace RobotDiagnosticApp.Classes
             recvY = 0;
             recvOrientation = 0;
         }
+        //if car did not move yet
         public void Test()
         {
-            
-            sentIsSelfTest = true;
-        }
+            if (recvX == 0 && recvY ==0 && sentSpeed ==0 && recvOrientation ==0)
+            {
+                sentIsSelfTest = true;
+            }
+         }
         private async Task UpdateCommunicatinData()
         {
             //writing the senable parameters of the class
@@ -120,8 +125,7 @@ namespace RobotDiagnosticApp.Classes
             { 
                 setNewParameters(recvX, recvY, recvOrientation); 
             });
-            sentIsReset = false;
-            sentIsSelfTest = false;
+
             
         }
 
@@ -152,12 +156,30 @@ namespace RobotDiagnosticApp.Classes
         }
 
         //**********************FOR TEST ONLY*************************************** 
-        private void Move()
+        private async Task Move()
         {
+            if (sentIsSelfTest)
+            {
+                sentSpeed = 50;
+                sentSteeringWheelAngle = 90;
+            }
+            if( sentIsSelfTest && Math.Abs(recvOrientation - 360) < 5 )
+            {
+                sentIsSelfTest = false;
+                Debug.WriteLine("Test Ok");
+
+                var dispatcher = CoreApplication.MainView.CoreWindow.Dispatcher;
+                await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    Reset();
+                });
+            }
             int sign = (sentisReverse) ? -1 : 1;
-            recvOrientation += sentSteeringWheelAngle*sentSpeed / 1000;
-            recvX += sign*(sentSpeed * Math.Sin(recvOrientation * Math.PI / 180))*0.02;
-            recvY += sign*(sentSpeed * Math.Cos(recvOrientation * Math.PI / 180))*0.02;
+            recvOrientation += sentSteeringWheelAngle * sentSpeed / 1000;
+
+            recvX += sign * (sentSpeed * Math.Sin(recvOrientation * Math.PI / 180)) * 0.02;
+            recvY += sign * (sentSpeed * Math.Cos(recvOrientation * Math.PI / 180)) * 0.02;
+            
         }
     }
 }

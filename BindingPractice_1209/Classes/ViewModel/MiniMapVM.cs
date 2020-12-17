@@ -33,18 +33,20 @@ namespace RobotDiagnosticApp.Classes.ViewModel
             get => Model.Y;
             set => Model.Y = value;
         }
-        public int mapX
-        {
-            get => (int)Model.X + CENTERX_OFFSET;
-        }
-        public int mapY
-        {
-            get => CENTERY_OFFSET - (int)Model.Y;
-        }
         public int Orientation
         {
             get => Model.Orientation;
             set => Model.Orientation = value;
+        }
+
+        //offset values for corrigating the minimap basepoint
+        public int mapX
+        {
+            get => (int)Model.X + Constants.CENTERX_OFFSET;
+        }
+        public int mapY
+        {
+            get => Constants.CENTERY_OFFSET - (int)Model.Y;
         }
         public string PositionText
         {
