@@ -7,6 +7,7 @@ using System.Windows.Input;
 
 namespace RobotDiagnosticApp.Classes.Model
 {
+    //this model class is for handling the gearbox and the speedometer of the page
     class DrivingInterfaceModel : ObservableObject
     {
         private bool _gearShiftInReverse;
@@ -24,7 +25,6 @@ namespace RobotDiagnosticApp.Classes.Model
                 Notify();
             }
         }
-
         public int Speed 
         {
             get => _speed;
@@ -43,8 +43,12 @@ namespace RobotDiagnosticApp.Classes.Model
 
         public void Accelerate()
         {
-            if ((Speed += Constants.SPEED_CHANGE_SCALE) <= 100) { }
-            else Speed = 100;
+            //Checking the movement direction
+            int MAX_SPEED = (GearShiftInReverse) ? 50 : 100;
+
+            if ((Speed += Constants.SPEED_CHANGE_SCALE) <= MAX_SPEED) { }
+            else Speed = MAX_SPEED;
+
             Notify(nameof(Speed));
         }
         public void Brake()

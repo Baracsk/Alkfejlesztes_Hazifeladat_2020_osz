@@ -8,6 +8,7 @@ using System.Windows.Input;
 
 namespace RobotDiagnosticApp.Classes.ViewModel
 {
+    //Viewmodel of the steeringwheel class
     public class SteeringWheelVM : ObservableObject
     {
         SteeringWheelModel Model;
@@ -18,26 +19,10 @@ namespace RobotDiagnosticApp.Classes.ViewModel
             set => Model.Angle = value;
         }
 
-        public ICommand SteerLeftClicked
-        {
-            get
-            {
-                return new DelegateCommand(Model.SteerLeft);
-            }
-        }
-        public ICommand SteerRightClicked
-        {
-            get
-            {
-                return new DelegateCommand(Model.SteerRight);
-            }
-        }
-
         public SteeringWheelVM(int SteeringWheelAngle = 0)
         {
             Model = new SteeringWheelModel(SteeringWheelAngle);
             Model.PropertyChanged += Model_PropertyChanged;
-
         }
 
         private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -45,7 +30,7 @@ namespace RobotDiagnosticApp.Classes.ViewModel
             Notify(nameof(Angle));
         }
 
-        internal void Reset()
+        public async Task Reset()
         {
             Angle = 0;
         }

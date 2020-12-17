@@ -116,7 +116,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Classes\App.xaml.cs">
+    <Compile Include="Classes\View\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\00 Constants.cs" />
@@ -128,7 +128,7 @@
     <Compile Include="Classes\ViewModel\DrivingInterfaceVM.cs" />
     <Compile Include="Classes\ViewModel\MiniMapVM.cs" />
     <Compile Include="Classes\01 DelegateCommand.cs" />
-    <Compile Include="Classes\MainPage.xaml.cs">
+    <Compile Include="Classes\View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\ViewModel\SteeringWheelVM.cs" />
@@ -196,15 +196,11 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="Classes\App.xaml">
+    <ApplicationDefinition Include="Classes\View\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Classes\View\RobotDiagnosticView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Classes\MainPage.xaml">
+    <Page Include="Classes\View\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
