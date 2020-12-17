@@ -3,7 +3,7 @@
 Alapadatok:
 - A csapat neve: Coderz++
 - Csapattagok (név, neptun kód): Balogh Balázs Lóránt (D3JOWB), Illényi Barnabás (VDE5E5), Lefebvre Viktor (UQDXMY)
-- Leadáshoz videó URL:
+- Leadáshoz videó URL: https://drive.google.com/file/d/1WeLXQUG9Ymh9TPLb4ju98l8lj81m-_db/view?usp=sharing
 
 A videó későbbi evfolyamok számára bemutatható/felhasználható videó vágásra?
 - [x] Igen, névtelenül
