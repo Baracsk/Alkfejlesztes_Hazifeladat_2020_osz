@@ -132,10 +132,10 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\ViewModel\SteeringWheelVM.cs" />
-    <Compile Include="RecvData.cs" />
+    <Compile Include="Classes\RecvData.cs" />
     <Compile Include="HTTPlistener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SendData.cs" />
+    <Compile Include="Classes\SendData.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Classes\Package.appxmanifest">

@@ -9,6 +9,12 @@ using System.Windows.Input;
 using Windows.UI.Core;
 using Windows.ApplicationModel.Core;
 using System.Diagnostics;
+using BindingPractice_1209;
+using System.Threading;
+using System.Net;
+using System.IO;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace RobotDiagnosticApp.Classes 
 {
@@ -22,20 +28,28 @@ namespace RobotDiagnosticApp.Classes
         // TODO: make a communication interface class
 
         //Variables for the communication
-        private Timer timer;
+        private System.Timers.Timer timer;
 
         //recieved (POST)
         private double recvX;
         private double recvY;
         private int recvOrientation;
-
-        
+ 
         //sent (GET)
         private int sentSpeed;
         private int sentSteeringWheelAngle;
         private bool sentisReverse;
         private bool sentIsReset = false;
         private bool sentIsSelfTest = false;
+
+        //Server-side communication parameters
+        private RecvData recvData;
+        private SendData sendData;
+
+        private const string URI = "http://localhost:8000/data";
+        private Thread lThread;
+        private static HttpListener listener;
+
 
         public ICommand TestButtonClicked
         {
@@ -71,9 +85,19 @@ namespace RobotDiagnosticApp.Classes
             recvY = 0;
             recvOrientation = 0;
 
-            timer = new Timer(Constants.SYSTEM_TICK_MS);
+            timer = new System.Timers.Timer(Constants.SYSTEM_TICK_MS);
             timer.Elapsed += Timer_Elapsed;
 
+            //Comm. parameters
+            recvData = new RecvData(); //Data to Get (answer to POST)
+            sendData = new SendData(); //Data to Send (answer to GET) 
+
+            listener = new HttpListener();
+            listener.Prefixes.Add(URI);
+            listener.Start();
+
+            lThread = new Thread(new ThreadStart(listenThread));
+            lThread.Start();
         }
 
         //starts the timer
@@ -160,7 +184,92 @@ namespace RobotDiagnosticApp.Classes
 
         //**************TODO*********************
         //write functions for the communication class
+        public async void listenThread()
+        {
+            while (listener.IsListening)
+            {
+                var context = await listener.GetContextAsync();
+                try
+                {
+                    await HandlerMethodAsync(context);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.StackTrace);
+                }
 
+            }
+
+            listener.Close();
+        }
+
+        private async Task HandlerMethodAsync(HttpListenerContext ctx)
+        {
+            HttpListenerRequest req = ctx.Request;
+            HttpListenerResponse resp = ctx.Response;
+
+            //Console.WriteLine($"URL: {req.Url} \t{req.HttpMethod}");
+
+            if (req.Url.ToString().Equals(""))
+            {
+                if (req.HttpMethod.Equals("POST"))
+                    await HandleDataPostAsync(req, resp);
+                else if (req.HttpMethod.Equals("GET"))
+                    await HandleDataGet(req, resp);
+            }
+
+        }
+        private async Task<string> GetStringContentAsync(HttpListenerRequest req)
+        {
+            string result = "";
+            using (var bodyStream = req.InputStream)
+            {
+                var encoding = req.ContentEncoding;
+                using (var streamReader = new StreamReader(bodyStream, encoding))
+                {
+                    result = await streamReader.ReadToEndAsync();
+                }
+            }
+            return result;
+        }
+
+        private async Task BuildResponse(HttpListenerResponse resp, Encoding encoding, string content)
+        {
+            resp.StatusCode = 200;
+            byte[] buffer = encoding.GetBytes(content);
+            resp.ContentLength64 = buffer.Length;
+
+            await resp.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+            resp.OutputStream.Close();
+        }
+
+
+        private async Task HandleDataPostAsync(HttpListenerRequest req, HttpListenerResponse resp)
+        {
+            string reqcontent = await GetStringContentAsync(req);
+
+            JObject json = JObject.Parse(reqcontent);
+            recvData = json.ToObject<RecvData>();
+
+            recvX = recvData.recvX;
+            recvY = recvData.recvY;
+            recvOrientation = (int)recvData.recvOrientation;
+
+            await BuildResponse(resp, req.ContentEncoding, json.ToString());
+        }
+
+        private async Task HandleDataGet(HttpListenerRequest req, HttpListenerResponse resp)
+        {
+            sendData.sentSpeed = sentSpeed;
+            sendData.sentSteeringWheelAngle = sentSteeringWheelAngle;
+            sendData.sentisReverse = sentisReverse;
+            sendData.sentisReverse = sentisReverse;
+            sendData.sentIsSelfTest = sentIsSelfTest;
+
+            string jsonString = JsonConvert.SerializeObject(sendData);
+
+            await BuildResponse(resp, req.ContentEncoding, jsonString);
+        }
 
         //**********************FOR TEST ONLY*************************************** 
         private async Task Move()
