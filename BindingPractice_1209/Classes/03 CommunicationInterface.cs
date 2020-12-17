@@ -19,6 +19,7 @@ namespace RobotDiagnosticApp.Classes
         public DrivingInterfaceVM DrivingInterface;
         public MiniMapVM MiniMap;
         public SteeringWheelVM SteeringWheel;
+        // TODO: make a communication interface class
 
         //Variables for the communication
         private Timer timer;
@@ -49,16 +50,16 @@ namespace RobotDiagnosticApp.Classes
                 return new DelegateCommand(Reset);
             }
         }
-
-
-        public ICommand StartButtonClicked
+        public ICommand ConnectButtonClicked
         {
             get
             {
-                return new DelegateCommand(Start);
+                return new DelegateCommand(Connect);
             }
         }
 
+
+        //TODO assign the communication class here
         public CommunicationInterface()
         {
             DrivingInterface = new DrivingInterfaceVM();
@@ -74,20 +75,24 @@ namespace RobotDiagnosticApp.Classes
 
         }
 
-        public void Start()
+        //starts the timer
+        //TODO: if you want any actions when the timer starts write here (e.g. starting the connection)
+        public void Connect()
         {
             timer.Start();
         }
 
-        
+        //updates the interface
+        //TODO: if you want anything to run continuously, call its function here
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-
+            UpdateCommunicatinData();
             //***********************MOVE IS FOR TEST ONLY**********************
             Move();
-            UpdateCommunicatinData();
+            
         }
 
+        //resets everything to default and stops the timer (connection breaks!
         public void Reset()
         {
             DrivingInterface.Reset();
@@ -102,36 +107,17 @@ namespace RobotDiagnosticApp.Classes
             recvY = 0;
             recvOrientation = 0;
         }
-        //if car did not move yet
+
+        //if car did not move yet, it makes a test
         public void Test()
         {
             if (recvX == 0 && recvY ==0 && sentSpeed ==0 && recvOrientation ==0)
             {
                 sentIsSelfTest = true;
             }
-         }
-        private async Task UpdateCommunicatinData()
-        {
-            //writing the senable parameters of the class
-            sentSpeed = getSpeed();
-            sentSteeringWheelAngle = getSteewingWheelAngle();
-            sentisReverse = isGearBoxInReverse();
-
-            //TODO COMMUNICATE
-
-            //write back the recieved parameters
-            var dispatcher = CoreApplication.MainView.CoreWindow.Dispatcher;
-            await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => 
-            { 
-                setNewParameters(recvX, recvY, recvOrientation); 
-            });
-
-            
         }
 
-        //*************FOR COMMUNICATION*******************
-
-        //TO SEND
+        //functions for updating the communication data
         //gives back the current angle from the steering wheel in interval [-90, 90]
         private int getSteewingWheelAngle()
         {
@@ -155,6 +141,26 @@ namespace RobotDiagnosticApp.Classes
             MiniMap.UpdatePositionParameters(recvX, Y, orientation);
         }
 
+        //gets all the sendable data from the interface and updates interface with the arriving data when the timer elapses
+        private async Task UpdateCommunicatinData()
+        {
+            //writing the senable parameters of the class
+            sentSpeed = getSpeed();
+            sentSteeringWheelAngle = getSteewingWheelAngle();
+            sentisReverse = isGearBoxInReverse();
+
+            //write back the recieved parameters on UI thread
+            var dispatcher = CoreApplication.MainView.CoreWindow.Dispatcher;
+            await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => 
+            { 
+                setNewParameters(recvX, recvY, recvOrientation); 
+            });
+        }
+
+        //**************TODO*********************
+        //write functions for the communication class
+
+
         //**********************FOR TEST ONLY*************************************** 
         private async Task Move()
         {
@@ -174,6 +180,8 @@ namespace RobotDiagnosticApp.Classes
                     Reset();
                 });
             }
+
+            //This code should be on the robot program
             int sign = (sentisReverse) ? -1 : 1;
             recvOrientation += sentSteeringWheelAngle * sentSpeed / 1000;
 

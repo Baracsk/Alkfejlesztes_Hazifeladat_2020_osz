@@ -131,7 +131,7 @@
                 Grid.Column="1" 
                 VerticalAlignment="Center"
                 Margin="5,5,0,5" 
-                Command="{x:Bind Interface.StartButtonClicked, Mode=OneWay}"
+                Command="{x:Bind Interface.ConnectButtonClicked, Mode=OneWay}"
                 />
 
         <Button 
