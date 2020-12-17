@@ -1,8 +1,8 @@
 # Alkalmazásfejlesztés (VIAUMA09) házi feladat
 
 Alapadatok:
-- A csapat neve:
-- Csapattagok (név, neptun kód): aaa (abc123), bbb (def123), ccc (ghi123)
+- A csapat neve: Coderz++
+- Csapattagok (név, neptun kód): Balogh Balázs Lóránt (D3JOWB), Illényi Barnabás (VDE5E5), Lefebvre Viktor (ghi123)
 - Leadáshoz videó URL:
 
 A videó későbbi evfolyamok számára bemutatható/felhasználható videó vágásra?
@@ -73,26 +73,26 @@ Annak érdekében, hogy az adható visszajelzés minél hasznosabb legyen, javas
 Minden szempontnál a megadott pont a maximális adható pont, részleges megoldás kevesebb pontot is érhet. A pótleadáson maximum 50 pont szerezhető.
 
 Architektúra, magas szintű koncepciók
-- [ ] 10p: MVVM architektúra (legalább 3 modell és 3 view model osztállyal) (Videóban: solution explorerben megmutatva a modell és view model osztályokat)
+- [x] 10p: MVVM architektúra (legalább 3 modell és 3 view model osztállyal) (Videóban: solution explorerben megmutatva a modell és view model osztályokat)
 - Többszálúság
-  - [ ] 8p: Task és async-await használatával. (Videóban: forráskódban kiemelve)
+  - [x] 8p: Task és async-await használatával. (Videóban: forráskódban kiemelve)
   - [ ] 3p: BackgroundWorker használatával progress reporttal.
 - [ ] 10p: Entity Framework használata
 - [ ] 5p: Hálózati kommunikáció HTTP felett
   - [ ] +5p: HTTP feletti kommunikációban legalább 3 HTTP ige (get, put, delete, post stb.) használata, REST API kialakítása
 
 Technológiák
-- [ ] 5p: Canvas és Shape használata (Videóban: UI-on megmutatva)
-- [ ] 5p: Adatkötés használata (Videóban: xaml kód)
+- [x] 5p: Canvas és Shape használata (Videóban: UI-on megmutatva)
+- [x] 5p: Adatkötés használata (Videóban: xaml kód)
 - [ ] 10p: Heterogén listához adatkötés (DataTemplateSelector) (Videóban: xaml kód)
 - [ ] 5p: Regex használat nem triviális feladatra (pl. nem Substring helyett) (Videóban: forráskód részlet)
 - [ ] 5p: IValueConverter használata (Videóban: xaml kód)
-- [ ] 5p: ICommand (Videóban: forráskódban az ICommandot implementáló osztály)
+- [x] 5p: ICommand (Videóban: forráskódban az ICommandot implementáló osztály)
 - [ ] 5p: StaticResource használata (Videóban: xaml kód)
 - [ ] 5p: Fájlba mentés és onnan betöltés (az UWP hozzáférési korlátozásokat figyelembe véve) (Videóban: használat közben a UI vagy forráskód részlet)
 - [ ] 5p: Linq használata nem triviális feladatra (query vagy method syntax is lehet) (Videóban: forráskódban kiemelve)
 - [ ] 5p: Sorosítás JSON vagy XML formátumba (Videóban: generált XML/JSON felvillantása)
-- [ ] 5p: Alapos öntesztelő funkció a robot számára. A tesztet futtathatja a kliens program is, de a robot firmwareje is. A lényeg, hogy van öntesztelési funkció. (Videóban: futás közben bemutatva)
+- [x] 5p: Alapos öntesztelő funkció a robot számára. A tesztet futtathatja a kliens program is, de a robot firmwareje is. A lényeg, hogy van öntesztelési funkció. (Videóban: futás közben bemutatva)
 - [ ] 10p: grafikon megjelenítő package (pl. oxyplot) használata nem csak alapbeállításokkal (Videóban: UI-on megmutatva)
 
 Módszertani szempontok
